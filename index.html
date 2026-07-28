@@ -100,6 +100,19 @@
         .nav-links { display: flex; gap: 1.4rem; font-size: 0.92rem; }
         .nav-links a { color: var(--ink); text-decoration: none; font-weight: 600; transition: color 0.2s; }
         .nav-links a:hover { color: #0891b2; }
+        /* 햄버거 버튼 (모바일 전용) */
+        .nav-toggle {
+            display: none; flex-direction: column; justify-content: center; gap: 5px;
+            width: 40px; height: 40px; padding: 8px; border: none; background: transparent;
+            cursor: pointer; border-radius: 10px;
+        }
+        .nav-toggle span {
+            display: block; height: 2px; width: 100%; border-radius: 2px;
+            background: var(--ink); transition: transform 0.25s, opacity 0.2s;
+        }
+        .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .nav-toggle.open span:nth-child(2) { opacity: 0; }
+        .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
         /* 공통 섹션 */
         section { padding: 5.5rem 0; }
@@ -829,7 +842,25 @@
         }
         @media (max-width: 640px) {
             section { padding: 3.8rem 0; }
-            .nav-links { display: none; }
+            .nav-toggle { display: flex; }
+            /* 기본은 숨김, 햄버거로 열면 드롭다운 */
+            .nav-links {
+                display: none;
+                position: absolute; top: 100%; left: 0; right: 0;
+                flex-direction: column; gap: 0;
+                background: rgba(255,255,255,0.97);
+                backdrop-filter: blur(24px) saturate(180%);
+                -webkit-backdrop-filter: blur(24px) saturate(180%);
+                border-bottom: 1px solid rgba(148,163,184,0.2);
+                box-shadow: 0 12px 32px -12px rgba(14,116,144,0.25);
+                padding: 0.4rem 0;
+            }
+            .nav-links.open { display: flex; }
+            .nav-links a {
+                padding: 0.85rem 1.5rem; font-size: 1rem;
+                border-bottom: 1px solid rgba(148,163,184,0.12);
+            }
+            .nav-links a:last-child { border-bottom: none; }
             .stage {
                 aspect-ratio: auto;
                 display: flex; flex-direction: column;
@@ -872,7 +903,7 @@
             <span class="brand-mark">매</span>
             <span>매실 패밀리</span>
         </div>
-        <div class="nav-links">
+        <div class="nav-links" id="navLinks">
             <a href="#solution">패밀리</a>
             <a href="#scenarios">산업별</a>
             <a href="#products">제품</a>
@@ -880,8 +911,33 @@
             <a href="#current">통합시스템</a>
             <a href="https://blog.maesil.net/">블로그</a>
         </div>
+        <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="navLinks">
+            <span></span><span></span><span></span>
+        </button>
     </div>
 </nav>
+<script>
+    (function () {
+        var t = document.getElementById('navToggle');
+        var l = document.getElementById('navLinks');
+        if (!t || !l) return;
+        t.addEventListener('click', function () {
+            var open = l.classList.toggle('open');
+            t.classList.toggle('open', open);
+            t.setAttribute('aria-expanded', open ? 'true' : 'false');
+            t.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+        });
+        // 링크 클릭 시 메뉴 닫기
+        l.querySelectorAll('a').forEach(function (a) {
+            a.addEventListener('click', function () {
+                l.classList.remove('open');
+                t.classList.remove('open');
+                t.setAttribute('aria-expanded', 'false');
+                t.setAttribute('aria-label', '메뉴 열기');
+            });
+        });
+    })();
+</script>
 
 <!-- ① 히어로 -->
 <section class="hero">
