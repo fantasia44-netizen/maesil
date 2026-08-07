@@ -985,6 +985,112 @@
     </div>
 </section>
 
+<!-- ①-b 셀러와 함께하는 매실K 블로그 (blog.maesil.net 최신 글 실시간 로드) -->
+<section class="blogfeed" id="blog">
+    <div class="container">
+        <div style="text-align:center;">
+            <div class="eyebrow">MAESIL BLOG</div>
+            <h2 class="h2">셀러와 함께하는 매실K 블로그</h2>
+            <p class="lead" style="margin: 0 auto;">
+                온라인 판매·브랜드 운영 현장에서 나온 실전 인사이트를 매주 나눕니다.
+            </p>
+        </div>
+
+        <div class="bf-grid" id="bfGrid" aria-live="polite">
+            <div class="bf-loading">최신 글을 불러오는 중…</div>
+        </div>
+
+        <div style="text-align:center; margin-top: 2.4rem;">
+            <a href="https://blog.maesil.net/" class="btn btn-ghost">
+                <i class="bi bi-journal-text"></i>
+                블로그 전체 보기
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+    .blogfeed .bf-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.4rem;
+        margin-top: 2.6rem;
+    }
+    .bf-card {
+        display: flex; flex-direction: column;
+        background: var(--glass-strong, rgba(255,255,255,0.75));
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        overflow: hidden;
+        text-decoration: none;
+        color: var(--navy);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 10px 30px -14px rgba(15,23,42,0.25);
+        transition: transform 0.2s cubic-bezier(.4,0,.2,1), box-shadow 0.2s;
+    }
+    .bf-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 44px -16px rgba(15,23,42,0.32);
+    }
+    .bf-thumb {
+        aspect-ratio: 16 / 9;
+        background: linear-gradient(135deg, #a3e635 0%, #22d3ee 55%, #a78bfa 100%);
+        background-size: cover; background-position: center;
+    }
+    .bf-body { padding: 1.15rem 1.25rem 1.35rem; display: flex; flex-direction: column; gap: 0.5rem; flex: 1; }
+    .bf-cat {
+        font-family: 'Space Grotesk', 'Inter', sans-serif;
+        font-size: 0.68rem; letter-spacing: 1.5px; text-transform: uppercase;
+        font-weight: 700; color: #0891b2;
+    }
+    .bf-title { font-size: 1.04rem; font-weight: 800; line-height: 1.35; letter-spacing: -0.3px; }
+    .bf-excerpt { font-size: 0.9rem; color: var(--muted); line-height: 1.55; flex: 1; }
+    .bf-date { font-size: 0.78rem; color: var(--muted); font-weight: 500; }
+    .bf-loading { grid-column: 1 / -1; text-align: center; color: var(--muted); padding: 2rem 0; }
+</style>
+
+<script>
+(function () {
+    var API = 'https://blog.maesil.net/wp-json/wp/v2/posts?per_page=6&_embed=1';
+    var grid = document.getElementById('bfGrid');
+    function esc(s) { var d = document.createElement('div'); d.textContent = s == null ? '' : s; return d.innerHTML; }
+    function strip(html) { var d = document.createElement('div'); d.innerHTML = html || ''; return (d.textContent || '').trim(); }
+    fetch(API, { credentials: 'omit' })
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(function (posts) {
+            if (!Array.isArray(posts) || !posts.length) { grid.innerHTML = ''; return; }
+            grid.innerHTML = posts.map(function (p) {
+                var emb = p._embedded || {};
+                var media = (emb['wp:featuredmedia'] || [])[0];
+                var img = media && media.source_url ? media.source_url : '';
+                var term = ((emb['wp:term'] || [])[0] || [])[0];
+                var cat = term && term.name ? term.name : '매실K';
+                var title = strip(p.title && p.title.rendered);
+                var ex = strip(p.excerpt && p.excerpt.rendered);
+                if (ex.length > 90) ex = ex.slice(0, 90) + '…';
+                var dt = new Date(p.date);
+                var date = isNaN(dt.getTime()) ? '' :
+                    dt.getFullYear() + '.' + ('0' + (dt.getMonth() + 1)).slice(-2) + '.' + ('0' + dt.getDate()).slice(-2);
+                var thumb = img
+                    ? '<div class="bf-thumb" style="background-image:url(\'' + encodeURI(img) + '\')"></div>'
+                    : '<div class="bf-thumb"></div>';
+                return '<a class="bf-card" href="' + esc(p.link) + '">'
+                    + thumb
+                    + '<div class="bf-body">'
+                    + '<span class="bf-cat">' + esc(cat) + '</span>'
+                    + '<div class="bf-title">' + esc(title) + '</div>'
+                    + '<div class="bf-excerpt">' + esc(ex) + '</div>'
+                    + '<span class="bf-date">' + esc(date) + '</span>'
+                    + '</div></a>';
+            }).join('');
+        })
+        .catch(function () {
+            grid.innerHTML = '<div class="bf-loading">블로그 글을 불러오지 못했습니다. '
+                + '<a href="https://blog.maesil.net/" style="color:#0891b2;">블로그로 이동 →</a></div>';
+        });
+})();
+</script>
+
 <!-- ② 문제 정의 -->
 <section class="problem" id="problem">
     <div class="container problem-wrap">
