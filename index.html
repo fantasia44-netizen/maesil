@@ -22,6 +22,7 @@
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--body);font-family:'Noto Sans KR',system-ui,-apple-system,sans-serif;line-height:1.75;word-break:keep-all;overflow-wrap:break-word}
 a{color:inherit}
+img{max-width:100%;height:auto}
 .wrap{max-width:1080px;margin:0 auto;padding:0 16px}
 section{padding:88px 0;scroll-margin-top:64px}
 .soft{background:var(--soft)}
@@ -128,6 +129,41 @@ h2{font-size:clamp(1.6rem,3.6vw,2.2rem);line-height:1.35;font-weight:900}
 .contact .btn-line{background:transparent;color:#fff;border-color:#334155}
 .contact .cta-row{justify-content:center}
 
+/* 이미지 */
+.shot{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#fff;box-shadow:0 18px 40px -24px rgba(15,23,42,.35)}
+.shot img{display:block;width:100%;height:auto}
+.shot figcaption{font-size:.82rem;color:var(--muted);padding:9px 14px;border-top:1px solid var(--line);background:#fff}
+.browser{border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#fff;box-shadow:0 30px 60px -30px rgba(15,23,42,.45)}
+.browser .bar{height:28px;background:#f1f5f9;display:flex;gap:6px;align-items:center;padding:0 12px;border-bottom:1px solid var(--line)}
+.browser .bar i{width:9px;height:9px;border-radius:50%;background:#cbd5e1;display:block}
+.browser img{display:block;width:100%;height:auto}
+.hero-in{display:grid;gap:44px;align-items:center}
+.hero-visual{position:relative}
+.hero-visual .float{position:absolute;width:52%;left:-6%;bottom:-14%;border:4px solid #fff;border-radius:12px;overflow:hidden;box-shadow:0 24px 50px -20px rgba(15,23,42,.5)}
+.hero-visual .float img{display:block;width:100%}
+@media (min-width:980px){.hero-in{grid-template-columns:1fr 1.05fr}}
+@media (max-width:979px){.hero-visual{margin:8px 0 40px}.hero-visual .float{left:auto;right:-4px;width:46%;bottom:-18%}}
+.gallery{display:grid;gap:14px;margin-top:36px;grid-template-columns:repeat(6,1fr)}
+.gallery .wide{grid-column:1/-1}
+.gallery .third{grid-column:span 2}
+.gallery .half{grid-column:span 3}
+@media (max-width:760px){.gallery{grid-template-columns:1fr 1fr}.gallery .third,.gallery .half{grid-column:span 1}.gallery .wide{grid-column:1/-1}}
+.result{display:grid;gap:28px;margin-top:40px;align-items:center}
+@media (min-width:900px){.result{grid-template-columns:1fr 1.1fr}}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:22px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}
+.stat b{display:block;font-size:1.35rem;color:var(--ink);font-weight:900;letter-spacing:-.02em}
+.stat span{font-size:.82rem;color:var(--muted)}
+.prod{display:grid;gap:28px;align-items:center;margin-top:56px}
+.prod:first-of-type{margin-top:40px}
+@media (min-width:900px){.prod{grid-template-columns:1fr 1.2fr}.prod.rev .prod-text{order:2}}
+.prod h3{font-size:1.45rem;font-weight:900;margin-bottom:4px}
+.prod .role{display:inline-block;font-size:.78rem;font-weight:800;color:var(--accent);background:var(--accent-soft);padding:3px 10px;border-radius:999px;margin-bottom:12px}
+.prod ul{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:6px;font-size:.94rem}
+.prod li{display:flex;gap:8px}.prod li i{color:var(--accent);margin-top:.2em}
+.prod .go{display:inline-flex;gap:6px;margin-top:16px;font-weight:800;color:var(--accent);text-decoration:none}
+.mini{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+
 footer{padding:36px 0 44px;font-size:.8rem;color:var(--muted);line-height:1.9;border-top:1px solid var(--line)}
 footer .links{display:flex;flex-wrap:wrap;gap:6px 16px;margin-bottom:12px}
 footer a{color:var(--muted)}
@@ -147,7 +183,8 @@ footer a{color:var(--muted)}
       <a href="#service">서비스</a>
       <a href="#flow">진행 방식</a>
       <a href="#case">사례</a>
-      <a href="#tech">매실 기술</a>
+      <a href="#result">성과</a>
+      <a href="#tech">제품</a>
       <a href="https://blog.maesil.net/">블로그</a>
       <a class="cta" href="https://shop.maesil.net/contact">상담 신청</a>
     </div>
@@ -162,18 +199,24 @@ l.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(
 
 <!-- ① 첫 화면 -->
 <header class="hero" id="top">
-  <div class="wrap">
-    <div class="eyebrow">MAESIL FAMILY</div>
-    <h1>온라인 사업,<br>구축만 하고 끝내지 않습니다.</h1>
-    <p class="lead">브랜드 기획부터 쇼핑몰, 상세페이지, 광고, 매출 분석까지 — 매실패밀리가 직접 만들고, 운영하고, 함께 키웁니다.</p>
-    <div class="cta-row">
-      <a class="btn btn-dark" href="https://shop.maesil.net/contact"><i class="bi bi-chat-dots"></i>상담 신청</a>
-      <a class="btn btn-line" href="#case"><i class="bi bi-layers"></i>구축 사례 보기</a>
+  <div class="wrap hero-in">
+    <div>
+      <div class="eyebrow">MAESIL FAMILY</div>
+      <h1>온라인 사업,<br>구축만 하고 끝내지 않습니다.</h1>
+      <p class="lead">브랜드 기획부터 쇼핑몰, 상세페이지, 광고, 매출 분석까지 — 매실패밀리가 직접 만들고, 운영하고, 함께 키웁니다.</p>
+      <div class="cta-row">
+        <a class="btn btn-dark" href="https://shop.maesil.net/contact"><i class="bi bi-chat-dots"></i>상담 신청</a>
+        <a class="btn btn-line" href="#case"><i class="bi bi-layers"></i>구축 사례 보기</a>
+      </div>
+      <div class="steps3" aria-label="매실패밀리가 하는 일">
+        <span><i class="bi bi-hammer"></i> 구축</span>
+        <span><i class="bi bi-gear"></i> 운영</span>
+        <span><i class="bi bi-graph-up-arrow"></i> 성장</span>
+      </div>
     </div>
-    <div class="steps3" aria-label="매실패밀리가 하는 일">
-      <span><i class="bi bi-hammer"></i> 구축</span>
-      <span><i class="bi bi-gear"></i> 운영</span>
-      <span><i class="bi bi-graph-up-arrow"></i> 성장</span>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="img/insight_dash.webp" width="1400" height="725" alt=""></div>
+      <div class="float"><img src="img/case_shop.webp" width="1200" height="396" alt=""></div>
     </div>
   </div>
 </header>
@@ -266,6 +309,14 @@ l.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(
     <div class="case-head">
       <span class="tag">브랜드 구축</span><span class="tag">리뉴얼</span><span class="tag">자사몰</span>
     </div>
+    <div class="gallery">
+      <figure class="shot wide"><img src="img/case_shop.webp" width="1200" height="396" loading="lazy" alt="쇼핑몰 첫 화면 — 한지 바탕에 놋그릇 전복죽"><figcaption>쇼핑몰 첫 화면 — 구매 영역은 밝고 간결하게</figcaption></figure>
+      <figure class="shot half"><img src="img/case_corp.webp" width="1200" height="601" loading="lazy" alt="브랜드 소개 면 — 한옥 처마와 한지"><figcaption>브랜드 소개 면 — 한옥 · 한지 결의 디자인 컨셉</figcaption></figure>
+      <figure class="shot half"><img src="img/concept_2.webp" width="900" height="473" loading="lazy" alt="한옥 매화와 놋그릇 연출 이미지"><figcaption>디자인 컨셉 — 브랜드 전용 연출 이미지</figcaption></figure>
+      <figure class="shot third"><img src="img/case_detail.webp" width="680" height="790" loading="lazy" alt="상세페이지 — 한 장면 한 메시지"><figcaption>상세페이지 — 한 장면, 한 메시지</figcaption></figure>
+      <figure class="shot third"><img src="img/concept_food.webp" width="680" height="790" loading="lazy" alt="한옥 상차림 연출 이미지 — 간장 전복"><figcaption>연출 이미지 — 상차림</figcaption></figure>
+      <figure class="shot third"><img src="img/concept_gift.webp" width="680" height="790" loading="lazy" alt="매화와 보자기 선물상자 연출 이미지"><figcaption>연출 이미지 — 선물 구성</figcaption></figure>
+    </div>
     <div class="grid g3">
       <div class="card"><i class="ic bi bi-compass"></i><h3>브랜드 컨셉</h3><p>매장의 본업과 온라인 상품을 하나의 이야기로 묶는 브랜드 방향을 정리했습니다.</p></div>
       <div class="card"><i class="ic bi bi-palette"></i><h3>디자인 컨셉</h3><p>전통 한옥·한지 결의 고급 한식 톤. 브랜드 소개는 무게 있게, 구매 화면은 밝고 간결하게 나눴습니다.</p></div>
@@ -275,6 +326,28 @@ l.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(
       <div class="card"><i class="ic bi bi-bag-check"></i><h3>판매 환경</h3><p>자사몰, 냉동 배송 묶음 규칙, 결제 심사 준비, 이용약관·개인정보처리방침까지 갖췄습니다.</p></div>
     </div>
     <p class="case-note">고객사 요청으로 회사명은 밝히지 않습니다. 운영 성과는 데이터가 쌓이면 이곳에 더합니다.</p>
+  </div>
+</section>
+
+<!-- ⑤-2 운영 성과 — 매실인사이트 공개 사례(A사) 그대로 -->
+<section id="result">
+  <div class="wrap">
+    <div class="eyebrow">RESULT</div>
+    <h2>광고비는 그대로, 월매출은 5.1배</h2>
+    <p class="lead">쿠팡에서 판매 중인 A사가 매실인사이트 광고 성과 리포트로 전환 기여가 낮은 광고그룹을 추려 정리했습니다. 7개월 동안 추적한 숫자 그대로입니다.</p>
+    <div class="result">
+      <div>
+        <div class="stats">
+          <div class="stat"><b>3,778만 → 1억 9,394만</b><span>월매출 (2026.03 → 09)</span></div>
+          <div class="stat"><b>539% → 2,014%</b><span>광고 수익률(ROAS)</span></div>
+          <div class="stat"><b>13.9% → 2.7%</b><span>매출 대비 광고비</span></div>
+          <div class="stat"><b>420만~610만 원</b><span>월 광고비 — 거의 그대로</span></div>
+        </div>
+        <p class="case-note">쿠팡 윙 광고 성과 화면 원본에서 요약 영역만 잘라냈고, 수치는 가공하지 않았습니다.
+          <a href="https://maesil-insight.com/cases" style="color:var(--accent);font-weight:700">사례 자세히 보기 →</a></p>
+      </div>
+      <figure class="shot"><img src="img/insight_case.webp" width="1000" height="810" loading="lazy" alt="쿠팡 광고 성과 요약 화면 2026.03~08 — 월별 광고비, 전체 매출, 광고 수익률"><figcaption>쿠팡 광고 성과 요약 · 2026.03~08</figcaption></figure>
+    </div>
   </div>
 </section>
 
@@ -300,15 +373,64 @@ l.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(
 <section id="tech" class="soft tech">
   <div class="wrap">
     <div class="eyebrow">TECHNOLOGY</div>
-    <h2>반복 업무는 직접 만든 도구가 합니다</h2>
-    <p class="lead">매실은 온라인 판매를 직접 해 오며 필요한 도구를 만들었습니다. 사람이 하던 반복 업무를 줄인 만큼, 고객사 일에 더 많은 시간을 씁니다.</p>
-    <div class="grid g4">
-      <div class="card"><span class="name">매실인사이트</span><span class="role">분석 · 정산</span><p>채널별 매출·광고·정산을 한곳에 모아 숫자로 봅니다.</p></div>
-      <div class="card"><span class="name">매실스튜디오</span><span class="role">콘텐츠</span><p>상세페이지·블로그·소식 글을 빠르고 일정한 품질로 만듭니다.</p></div>
-      <div class="card"><span class="name">매실샵</span><span class="role">쇼핑몰 · 주문</span><p>자사몰과 주문·배송·결제를 운영합니다.</p></div>
-      <div class="card"><span class="name">매실에이전트</span><span class="role">자동화</span><p>보고·점검 같은 반복 업무를 대신 실행합니다.</p></div>
+    <h2>직접 만든 제품으로 일합니다</h2>
+    <p class="lead">매실은 온라인 판매를 직접 해 오며 필요한 도구를 만들었습니다. 지금도 서비스 중인 제품들이고, 운영대행은 이 제품들 위에서 돌아갑니다.</p>
+
+    <div class="prod">
+      <div class="prod-text">
+        <span class="role">분석 · 정산 · 서비스 중</span>
+        <h3>매실인사이트</h3>
+        <p>스마트스토어 · 쿠팡 · 자사몰의 매출, 수수료, 광고비, 원가를 한 화면에 모아 진짜 남는 돈을 보여 줍니다.</p>
+        <ul>
+          <li><i class="bi bi-check2"></i>월정산 종합 — 매출에서 순정산까지 한 흐름으로</li>
+          <li><i class="bi bi-check2"></i>상품별 공헌이익 — 팔수록 손해 보는 상품 찾기</li>
+          <li><i class="bi bi-check2"></i>광고 성과 리포트 — 줄여도 되는 광고 추리기</li>
+        </ul>
+        <a class="go" href="https://maesil-insight.com">매실인사이트 보러 가기 <i class="bi bi-arrow-right"></i></a>
+      </div>
+      <div class="mini">
+        <div class="browser" style="grid-column:1/-1"><div class="bar"><i></i><i></i><i></i></div><img src="img/insight_dash.webp" width="1400" height="725" loading="lazy" alt="매실인사이트 월정산 종합 화면 — 매출, 수수료, 광고비, 순정산"></div>
+        <div class="browser" style="grid-column:1/-1"><div class="bar"><i></i><i></i><i></i></div><img src="img/insight_profit.webp" width="1400" height="721" loading="lazy" alt="매실인사이트 공헌이익 화면 — 상품별 수익성"></div>
+      </div>
     </div>
-    <p class="self">매실인사이트를 직접 쓰고 계신가요? <a href="https://maesil-insight.com">매실인사이트 바로가기 →</a></p>
+
+    <div class="prod rev">
+      <div class="prod-text">
+        <span class="role">콘텐츠 · 서비스 중</span>
+        <h3>매실스튜디오</h3>
+        <p>브랜드 정체성부터 블로그, 인스타그램, 광고 카피, 상세페이지까지 한 곳에서 만듭니다. 상세페이지는 초안 카피에서 이미지 촬영 지시서, 완성본까지 이어집니다.</p>
+        <ul>
+          <li><i class="bi bi-check2"></i>상세페이지 빌더 — 폰에서 내려 읽는 세로형, 표시 규정 점검</li>
+          <li><i class="bi bi-check2"></i>브랜드 공통 블록 — 약속 · 배송 안내를 한 번 만들어 계속 쓰기</li>
+          <li><i class="bi bi-check2"></i>완성본을 매실샵 상품에 바로 보내기</li>
+        </ul>
+        <a class="go" href="https://maesil-studio.onrender.com">매실스튜디오 보러 가기 <i class="bi bi-arrow-right"></i></a>
+      </div>
+      <div class="mini">
+        <figure class="shot" style="grid-column:1/-1"><img src="img/studio_features.webp" width="1200" height="404" loading="lazy" alt="매실스튜디오 기능 — 블로그, 인스타그램, 상세페이지 카피, 썸네일 문구, 광고 카피, 브랜드 정체성"></figure>
+        <figure class="shot"><img src="img/case_detail.webp" width="680" height="790" loading="lazy" alt="매실스튜디오로 만든 상세페이지 한 장면"><figcaption>스튜디오로 만든 상세 한 장면</figcaption></figure>
+        <figure class="shot"><img src="img/concept_pot.webp" width="680" height="790" loading="lazy" alt="가마솥 연출 이미지"><figcaption>프롬프트로 맞춘 연출 이미지</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="prod">
+      <div class="prod-text">
+        <span class="role">쇼핑몰 · 주문 · 서비스 중</span>
+        <h3>매실샵</h3>
+        <p>브랜드 소개 면과 쇼핑몰 면을 한 사이트에 나눠 담는 자사몰입니다. 주문 · 배송 · 결제 · 후기 · 문의까지 운영에 필요한 것이 다 들어 있습니다.</p>
+        <ul>
+          <li><i class="bi bi-check2"></i>상온 · 냉장 · 냉동 묶음 배송 규칙</li>
+          <li><i class="bi bi-check2"></i>상품정보 고시 · 받으신 뒤 안내 · 자주 묻는 질문</li>
+          <li><i class="bi bi-check2"></i>구매 회원만 쓰는 후기, 스팸 막는 문의</li>
+        </ul>
+      </div>
+      <figure class="shot"><img src="img/case_shop.webp" width="1200" height="396" loading="lazy" alt="매실샵으로 만든 쇼핑몰 첫 화면"><figcaption>매실샵으로 만든 쇼핑몰</figcaption></figure>
+    </div>
+
+    <div class="grid g3" style="margin-top:48px">
+      <div class="card"><span class="name">매실에이전트</span><span class="role">자동화</span><p>매일 보고 · 점검 같은 반복 업무를 대신 실행합니다. 고객사가 늘어도 운영 품질이 흔들리지 않게 하는 뒷단입니다.</p></div>
+    </div>
+    <p class="self">매실인사이트 · 매실스튜디오는 직접 가입해서 쓰실 수도 있습니다.</p>
   </div>
 </section>
 
