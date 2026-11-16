@@ -1,1436 +1,374 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>매실K · 온라인 셀러를 위한 실전 인사이트</title>
-    <meta name="description" content="쿠팡·스마트스토어·자사몰 — 현장에서 검증한 판매 전략과 데이터를 나누는 매실K 블로그. 그 인사이트를 도구로 만든 매실인사이트까지.">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>매실패밀리 · 온라인 브랜드 구축과 운영대행</title>
+<meta name="description" content="쇼핑몰 구축, 상세페이지, 광고, 매출 분석, 운영관리까지. 매실패밀리가 직접 만들고, 운영하고, 함께 키웁니다.">
+<meta property="og:title" content="매실패밀리 · 온라인 사업, 구축만 하고 끝내지 않습니다">
+<meta property="og:description" content="브랜드 기획부터 쇼핑몰·상세페이지·광고·매출 분석까지 직접 만들고 운영합니다.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://maesil.net/">
+<link rel="canonical" href="https://maesil.net/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<style>
+:root{
+  --ink:#0f172a; --body:#334155; --muted:#64748b; --line:#e2e8f0;
+  --bg:#ffffff; --soft:#f6f7f4; --accent:#3f6b2a; --accent-soft:#eef3e8;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--body);font-family:'Noto Sans KR',system-ui,-apple-system,sans-serif;line-height:1.75;word-break:keep-all;overflow-wrap:break-word}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+section{padding:88px 0;scroll-margin-top:64px}
+.soft{background:var(--soft)}
+.eyebrow{font-size:.76rem;font-weight:800;letter-spacing:.18em;color:var(--accent);margin-bottom:12px}
+h1,h2,h3{color:var(--ink);letter-spacing:-.02em;margin:0}
+h2{font-size:clamp(1.6rem,3.6vw,2.2rem);line-height:1.35;font-weight:900}
+.lead{font-size:1.05rem;color:var(--muted);margin:14px 0 0;max-width:640px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;border-radius:12px;font-weight:800;font-size:1rem;text-decoration:none;border:1px solid transparent;transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-dark{background:var(--ink);color:#fff}
+.btn-line{border-color:var(--line);color:var(--ink);background:#fff}
 
-        :root {
-            --c-insight:  #22d3ee;
-            --c-brand:    #f472b6;
-            --c-flower:   #fbbf24;
-            --c-ops:      #34d399;
-            --c-hub:      #a78bfa;
-            --c-total:    #84cc16;
-            --c-total-2:  #a3e635;
+/* 내비 */
+.nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;gap:16px;height:60px}
+.brand{display:flex;align-items:center;gap:9px;font-weight:900;color:var(--ink);text-decoration:none;font-size:1.05rem}
+.brand-mark{width:28px;height:28px;border-radius:8px;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:.9rem}
+.nav-links{margin-left:auto;display:flex;gap:22px;align-items:center}
+.nav-links a{text-decoration:none;font-size:.92rem;font-weight:600;color:var(--body)}
+.nav-links a.cta{background:var(--ink);color:#fff;padding:8px 14px;border-radius:9px}
+.nav-toggle{display:none;margin-left:auto;background:none;border:0;padding:8px;cursor:pointer}
+.nav-toggle span{display:block;width:22px;height:2px;background:var(--ink);margin:5px 0;transition:.2s}
+@media (max-width:860px){
+  .nav-toggle{display:block}
+  .nav-links{display:none;position:absolute;top:60px;left:0;right:0;background:#fff;flex-direction:column;align-items:stretch;gap:0;border-bottom:1px solid var(--line);padding:6px 16px 14px}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:12px 0;border-bottom:1px solid var(--line)}
+  .nav-links a.cta{text-align:center;margin-top:10px;border:0}
+}
 
-            --navy: #0f172a;
-            --ink:  #1e293b;
-            --muted:#64748b;
-            --line: rgba(148,163,184,0.18);
-            --glass: rgba(255,255,255,0.55);
-            --glass-strong: rgba(255,255,255,0.75);
-        }
+/* 첫 화면 */
+.hero{padding:96px 0 88px;background:linear-gradient(180deg,#f6f7f4 0%,#fff 100%)}
+.hero h1{font-size:clamp(2rem,5.6vw,3.3rem);line-height:1.25;font-weight:900}
+.hero .lead{font-size:clamp(1rem,2.2vw,1.15rem);max-width:620px}
+.cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}
+.steps3{display:flex;gap:8px;margin-top:40px;flex-wrap:wrap}
+.steps3 span{padding:7px 14px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:.86rem;font-weight:700;color:var(--ink)}
+.steps3 i{color:var(--accent)}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+/* 카드 공통 */
+.grid{display:grid;gap:16px;margin-top:40px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px 24px}
+.card h3{font-size:1.15rem;font-weight:800;margin:0 0 8px}
+.card p{margin:0;font-size:.95rem}
+.card .ic{font-size:1.5rem;color:var(--accent);display:block;margin-bottom:12px}
 
-        /* 풀화면 오로라 메쉬 배경 */
-        body {
-            font-family: 'Noto Sans KR', 'Inter', sans-serif;
-            color: var(--navy);
-            overflow-x: hidden;
-            line-height: 1.6;
-            background: #f8fbff;
-            position: relative;
-            min-height: 100vh;
-        }
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            z-index: -2;
-            background:
-                radial-gradient(circle at 15% 10%, rgba(163, 230, 53, 0.45) 0%, transparent 35%),
-                radial-gradient(circle at 85% 15%, rgba(34, 211, 238, 0.40) 0%, transparent 40%),
-                radial-gradient(circle at 75% 80%, rgba(244, 114, 182, 0.32) 0%, transparent 35%),
-                radial-gradient(circle at 10% 90%, rgba(167, 139, 250, 0.35) 0%, transparent 40%),
-                linear-gradient(180deg, #fbfdff 0%, #f1f7ff 50%, #f9fefa 100%);
-            animation: aurora-shift 24s ease-in-out infinite alternate;
-        }
-        body::after {
-            content: "";
-            position: fixed;
-            inset: 0;
-            z-index: -1;
-            background-image:
-                linear-gradient(rgba(100, 116, 139, 0.07) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(100, 116, 139, 0.07) 1px, transparent 1px);
-            background-size: 48px 48px;
-            mask-image: radial-gradient(circle at 50% 30%, black 0%, transparent 80%);
-            -webkit-mask-image: radial-gradient(circle at 50% 30%, black 0%, transparent 80%);
-            pointer-events: none;
-        }
-        @keyframes aurora-shift {
-            0%   { background-position: 0% 0%, 100% 0%, 100% 100%, 0% 100%, 0 0; filter: hue-rotate(0deg); }
-            50%  { filter: hue-rotate(15deg); }
-            100% { background-position: 20% 10%, 80% 20%, 70% 90%, 15% 85%, 0 0; filter: hue-rotate(-10deg); }
-        }
+/* 서비스 */
+.svc{display:flex;flex-direction:column;gap:14px}
+.svc .for{font-size:.82rem;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:4px 10px;border-radius:999px;align-self:flex-start}
+.svc ul{margin:0;padding:0;list-style:none;display:grid;gap:6px;font-size:.93rem}
+.svc li{display:flex;gap:8px}
+.svc li i{color:var(--accent);margin-top:.2em}
+.svc .you{margin-top:auto;padding-top:14px;border-top:1px dashed var(--line);font-size:.88rem;color:var(--muted)}
+.svc .you b{color:var(--ink)}
 
-        .container { max-width: 1140px; margin: 0 auto; padding: 0 1.5rem; }
+/* 진행 방식 */
+.flow{counter-reset:f;display:grid;gap:14px;margin-top:40px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.flow li{list-style:none;counter-increment:f;background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px}
+.flow li::before{content:"0" counter(f);display:block;font-weight:900;font-size:1.4rem;color:var(--accent);margin-bottom:6px}
+.flow h3{font-size:1.05rem;margin-bottom:6px}
+.flow p{margin:0;font-size:.92rem}
+.report{margin-top:22px;background:var(--ink);color:#cbd5e1;border-radius:16px;padding:24px;display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.report b{display:block;color:#fff;font-size:.98rem;margin-bottom:2px}
+.report span{font-size:.86rem}
+.report .t{grid-column:1/-1;color:#fff;font-weight:800}
 
-        /* 내비 — glass */
-        .nav {
-            position: sticky; top: 0; z-index: 50;
-            backdrop-filter: blur(24px) saturate(180%);
-            -webkit-backdrop-filter: blur(24px) saturate(180%);
-            background: rgba(255,255,255,0.55);
-            border-bottom: 1px solid rgba(255,255,255,0.6);
-            box-shadow: 0 1px 0 rgba(148,163,184,0.08), 0 8px 32px -20px rgba(14,116,144,0.15);
-        }
-        .nav-inner {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 0.9rem 1.5rem;
-            max-width: 1140px; margin: 0 auto;
-        }
-        .brand { display: flex; align-items: center; gap: 0.6rem; font-weight: 900; letter-spacing: -0.3px; }
-        .brand-mark {
-            width: 32px; height: 32px; border-radius: 10px;
-            background: linear-gradient(135deg, #a3e635, #22d3ee);
-            display: flex; align-items: center; justify-content: center;
-            color: #fff; font-weight: 900;
-            box-shadow: 0 6px 20px -4px rgba(132,204,22,0.55), inset 0 1px 0 rgba(255,255,255,0.5);
-        }
-        .nav-links { display: flex; gap: 1.4rem; font-size: 0.92rem; }
-        .nav-links a { color: var(--ink); text-decoration: none; font-weight: 600; transition: color 0.2s; }
-        .nav-links a:hover { color: #0891b2; }
-        /* 햄버거 버튼 (모바일 전용) */
-        .nav-toggle {
-            display: none; flex-direction: column; justify-content: center; gap: 5px;
-            width: 40px; height: 40px; padding: 8px; border: none; background: transparent;
-            cursor: pointer; border-radius: 10px;
-        }
-        .nav-toggle span {
-            display: block; height: 2px; width: 100%; border-radius: 2px;
-            background: var(--ink); transition: transform 0.25s, opacity 0.2s;
-        }
-        .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-        .nav-toggle.open span:nth-child(2) { opacity: 0; }
-        .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+/* 사례 */
+.case-head{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:baseline;margin-top:36px}
+.case-head .tag{font-size:.8rem;font-weight:700;padding:4px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
+.case-note{margin-top:18px;font-size:.88rem;color:var(--muted)}
 
-        /* 공통 섹션 */
-        section { padding: 5.5rem 0; }
-        .eyebrow {
-            display: inline-flex; align-items: center; gap: 0.45rem;
-            font-family: 'Space Grotesk', 'Inter', sans-serif;
-            font-size: 0.76rem; letter-spacing: 3px; text-transform: uppercase;
-            font-weight: 700; color: #0891b2;
-            padding: 0.4rem 0.9rem;
-            background: rgba(255,255,255,0.7);
-            border: 1px solid rgba(34,211,238,0.25);
-            border-radius: 999px;
-            margin-bottom: 1.2rem;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 6px 22px -8px rgba(34,211,238,0.35);
-        }
-        .eyebrow::before {
-            content: ""; width: 6px; height: 6px; border-radius: 50%;
-            background: #22d3ee; box-shadow: 0 0 10px #22d3ee;
-        }
-        .h2 {
-            font-size: clamp(1.7rem, 3.6vw, 2.6rem);
-            font-weight: 900; letter-spacing: -1.2px;
-            line-height: 1.22; margin-bottom: 0.85rem;
-            color: var(--navy);
-        }
-        .lead {
-            font-size: 1.06rem; color: var(--muted);
-            max-width: 680px; font-weight: 500;
-        }
+/* 요금 */
+.price{display:grid;gap:16px;margin-top:40px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.price .card h3{display:flex;gap:8px;align-items:center}
+.price-cta{margin-top:26px;padding:24px;border-radius:16px;background:var(--accent-soft);display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.price-cta p{margin:0;color:var(--ink);font-weight:700}
 
-        /* 히어로 ① */
-        .hero { padding: 5rem 0 3.5rem; text-align: center; position: relative; }
-        .hero .kicker {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.78rem; color: #0891b2;
-            letter-spacing: 4px; font-weight: 700;
-            text-transform: uppercase; margin-bottom: 1.2rem;
-            display: inline-flex; align-items: center; gap: 0.6rem;
-        }
-        .hero .kicker::before,
-        .hero .kicker::after {
-            content: ""; width: 28px; height: 1px;
-            background: linear-gradient(90deg, transparent, #22d3ee);
-        }
-        .hero .kicker::after { background: linear-gradient(90deg, #22d3ee, transparent); }
-        .hero h1 {
-            font-size: clamp(2.2rem, 5.4vw, 4rem);
-            font-weight: 900; letter-spacing: -2px; line-height: 1.12;
-            background: linear-gradient(135deg,
-                #0f172a 0%,
-                #0891b2 30%,
-                #84cc16 60%,
-                #a78bfa 100%);
-            background-size: 200% 200%;
-            -webkit-background-clip: text; background-clip: text; color: transparent;
-            margin-bottom: 1.2rem;
-            animation: gradient-flow 8s ease-in-out infinite;
-        }
-        @keyframes gradient-flow {
-            0%, 100% { background-position: 0% 50%; }
-            50%      { background-position: 100% 50%; }
-        }
-        .hero .subcopy {
-            font-size: 1.12rem; color: #475569;
-            max-width: 640px; margin: 0 auto 2.2rem;
-            font-weight: 500;
-        }
-        .cta-row {
-            display: flex; gap: 0.9rem; justify-content: center; flex-wrap: wrap;
-            margin-bottom: 3rem;
-        }
-        .btn {
-            display: inline-flex; align-items: center; gap: 0.55rem;
-            padding: 0.95rem 1.7rem; border-radius: 14px;
-            font-weight: 700; font-size: 0.98rem;
-            text-decoration: none;
-            transition: transform 0.2s cubic-bezier(.4,0,.2,1), box-shadow 0.2s, background 0.2s;
-            border: none; cursor: pointer;
-            position: relative; overflow: hidden;
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, #a3e635 0%, #22d3ee 100%);
-            background-size: 200% 100%;
-            background-position: 0% 0%;
-            color: #0f172a;
-            box-shadow:
-                0 14px 38px -10px rgba(132,204,22,0.55),
-                0 8px 24px -8px rgba(34,211,238,0.4),
-                inset 0 1px 0 rgba(255,255,255,0.5);
-        }
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            background-position: 100% 0%;
-            box-shadow:
-                0 20px 48px -10px rgba(132,204,22,0.65),
-                0 10px 30px -8px rgba(34,211,238,0.5),
-                inset 0 1px 0 rgba(255,255,255,0.6);
-        }
-        .btn-ghost {
-            background: rgba(255,255,255,0.7);
-            color: var(--ink);
-            border: 1px solid rgba(148,163,184,0.3);
-            backdrop-filter: blur(12px);
-        }
-        .btn-ghost:hover {
-            border-color: #22d3ee;
-            color: #0891b2;
-            background: rgba(255,255,255,0.9);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 28px -10px rgba(34,211,238,0.4);
-        }
+/* 기술 */
+.tech .card{padding:22px}
+.tech .name{font-weight:900;color:var(--ink);font-size:1.02rem}
+.tech .role{font-size:.8rem;font-weight:700;color:var(--accent);margin-left:6px}
+.tech p{margin-top:6px}
+.self{margin-top:18px;font-size:.9rem;color:var(--muted)}
+.self a{color:var(--accent);font-weight:700}
 
-        /* 3업 → 토탈 도식 — diamond/crystal */
-        .tri-diagram {
-            display: flex; align-items: center; justify-content: center;
-            gap: 1.2rem; flex-wrap: wrap;
-            max-width: 860px; margin: 0 auto;
-            padding: 1.8rem;
-            background: linear-gradient(135deg, rgba(255,255,255,0.75), rgba(255,255,255,0.5));
-            border: 1px solid rgba(255,255,255,0.8);
-            border-radius: 24px;
-            backdrop-filter: blur(24px) saturate(160%);
-            -webkit-backdrop-filter: blur(24px) saturate(160%);
-            box-shadow:
-                0 30px 60px -20px rgba(34,211,238,0.25),
-                0 10px 24px -10px rgba(132,204,22,0.2),
-                inset 0 1px 0 rgba(255,255,255,0.7);
-        }
-        .tri-item {
-            display: flex; flex-direction: column; align-items: center;
-            gap: 0.55rem; min-width: 100px;
-        }
-        .tri-ico {
-            width: 62px; height: 62px;
-            display: flex; align-items: center; justify-content: center;
-            color: #fff; font-size: 1.55rem;
-            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-            position: relative;
-            transition: transform 0.3s;
-        }
-        .tri-ico::before {
-            content: ""; position: absolute; inset: 0;
-            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-            background: inherit;
-            filter: blur(14px); opacity: 0.55; z-index: -1;
-        }
-        .tri-item:hover .tri-ico { transform: rotate(45deg) scale(1.05); }
-        .tri-item:hover .tri-ico i { transform: rotate(-45deg); }
-        .tri-ico i { transition: transform 0.3s; }
-        .tri-ico.mfg   { background: linear-gradient(135deg, #6ee7b7, #10b981 55%, #059669); }
-        .tri-ico.onl   { background: linear-gradient(135deg, #a5f3fc, #22d3ee 55%, #0891b2); }
-        .tri-ico.log   { background: linear-gradient(135deg, #fde68a, #fbbf24 55%, #d97706); }
-        .tri-ico.total {
-            background: linear-gradient(135deg, #d9f99d, #a3e635 40%, #65a30d);
-            width: 82px; height: 82px; font-size: 2.1rem;
-            animation: diamond-spin 10s linear infinite;
-        }
-        .tri-ico.total i { animation: diamond-spin 10s linear infinite reverse; }
-        @keyframes diamond-spin {
-            from { transform: rotate(0deg); }
-            to   { transform: rotate(360deg); }
-        }
-        .tri-label { font-size: 0.9rem; font-weight: 800; color: var(--ink); letter-spacing: -0.2px; }
-        .tri-sub   { font-size: 0.72rem; color: var(--muted); font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.5px; }
-        .tri-arrow {
-            color: #22d3ee; font-size: 1.5rem;
-            filter: drop-shadow(0 0 8px rgba(34,211,238,0.6));
-            animation: arrow-slide 2s ease-in-out infinite;
-        }
-        @keyframes arrow-slide {
-            0%, 100% { transform: translateX(0); opacity: 0.8; }
-            50%      { transform: translateX(4px); opacity: 1; }
-        }
+/* 블로그 */
+.bf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:36px}
+.bf-card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;text-decoration:none;color:var(--ink)}
+.bf-thumb{aspect-ratio:16/9;background:#e7ece2 center/cover}
+.bf-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
+.bf-cat{font-size:.72rem;font-weight:800;letter-spacing:.08em;color:var(--accent)}
+.bf-title{font-weight:800;line-height:1.45}
+.bf-excerpt{font-size:.88rem;color:var(--muted);flex:1}
+.bf-date{font-size:.78rem;color:var(--muted)}
+.bf-loading{grid-column:1/-1;text-align:center;color:var(--muted);padding:24px 0}
 
-        /* 문제 정의 ② */
-        .problem-wrap { max-width: 900px; margin: 0 auto; text-align: center; }
-        .problem h2 {
-            font-size: clamp(1.7rem, 3.8vw, 2.7rem);
-            font-weight: 900; letter-spacing: -1.2px; line-height: 1.3;
-            margin-bottom: 1.2rem;
-            color: var(--navy);
-        }
-        .problem h2 em {
-            font-style: normal;
-            background: linear-gradient(135deg, #fbbf24 0%, #f472b6 100%);
-            -webkit-background-clip: text; background-clip: text; color: transparent;
-            filter: drop-shadow(0 2px 12px rgba(251,191,36,0.35));
-        }
-        .pain-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr);
-            gap: 1.1rem; margin-top: 2.5rem;
-        }
-        .pain {
-            padding: 1.8rem 1.4rem;
-            background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(255,255,255,0.65));
-            border: 1px solid rgba(255,255,255,0.9);
-            border-radius: 20px;
-            text-align: left;
-            backdrop-filter: blur(20px) saturate(160%);
-            -webkit-backdrop-filter: blur(20px) saturate(160%);
-            box-shadow:
-                0 18px 44px -16px rgba(251,191,36,0.28),
-                inset 0 1px 0 rgba(255,255,255,0.9);
-            transition: transform 0.25s cubic-bezier(.4,0,.2,1), box-shadow 0.25s;
-            position: relative; overflow: hidden;
-        }
-        .pain::before {
-            content: ""; position: absolute; top: -40%; right: -40%;
-            width: 160px; height: 160px;
-            background: radial-gradient(circle, rgba(251,191,36,0.3), transparent 70%);
-            pointer-events: none;
-        }
-        .pain:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 26px 60px -18px rgba(251,191,36,0.38);
-        }
-        .pain i {
-            display: inline-flex; align-items: center; justify-content: center;
-            width: 44px; height: 44px;
-            background: linear-gradient(135deg, #fde68a, #fbbf24);
-            color: #fff; font-size: 1.2rem;
-            margin-bottom: 0.9rem;
-            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-            box-shadow: 0 8px 20px -6px rgba(251,191,36,0.55);
-        }
-        .pain b { display: block; font-size: 1.05rem; margin-bottom: 0.35rem; color: var(--navy); letter-spacing: -0.2px; }
-        .pain p { color: #475569; font-size: 0.94rem; line-height: 1.6; }
+/* 상담 */
+.contact{background:var(--ink);color:#cbd5e1;text-align:center}
+.contact h2{color:#fff}
+.contact .lead{color:#94a3b8;margin-left:auto;margin-right:auto}
+.contact .btn-dark{background:#fff;color:var(--ink)}
+.contact .btn-line{background:transparent;color:#fff;border-color:#334155}
+.contact .cta-row{justify-content:center}
 
-        /* 솔루션 ③ — 결정체 펜타곤 */
-        .solution { text-align: center; }
-        .stage {
-            position: relative;
-            width: min(92vw, 780px);
-            aspect-ratio: 1 / 1;
-            margin: 2rem auto 0;
-        }
-        .wire { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
-        .node {
-            position: absolute;
-            transform: translate(-50%, -50%) rotate(45deg);
-            width: 140px; height: 140px;
-            border-radius: 22px;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            color: #fff; text-align: center;
-            animation: float 7s ease-in-out infinite;
-            z-index: 2;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .node::before {
-            content: ""; position: absolute; inset: -2px;
-            border-radius: 24px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.2));
-            z-index: -1;
-            filter: blur(1px);
-        }
-        .node-inner {
-            transform: rotate(-45deg);
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-        }
-        .node:nth-child(3) { animation-delay: 0s; }
-        .node:nth-child(4) { animation-delay: 1.2s; }
-        .node:nth-child(5) { animation-delay: 2.4s; }
-        .node:nth-child(6) { animation-delay: 3.6s; }
-        .node:nth-child(7) { animation-delay: 4.8s; }
-        @keyframes float {
-            0%, 100% { transform: translate(-50%, -50%) rotate(45deg) translateY(0); }
-            50%      { transform: translate(-50%, -50%) rotate(45deg) translateY(-10px); }
-        }
-        .node:hover {
-            z-index: 5;
-        }
-        .node i { font-size: 1.7rem; margin-bottom: 0.3rem; opacity: 0.98; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.18)); }
-        .node .name { font-size: 1rem; font-weight: 800; letter-spacing: -0.3px; text-shadow: 0 1px 2px rgba(0,0,0,0.15); }
+footer{padding:36px 0 44px;font-size:.8rem;color:var(--muted);line-height:1.9;border-top:1px solid var(--line)}
+footer .links{display:flex;flex-wrap:wrap;gap:6px 16px;margin-bottom:12px}
+footer a{color:var(--muted)}
+@media (max-width:600px){section{padding:64px 0}.hero{padding:64px 0 56px}.btn{width:100%;justify-content:center}}
+</style>
 
-        .n-insight {
-            background: linear-gradient(135deg, #a5f3fc 0%, #22d3ee 50%, #0891b2 100%);
-            box-shadow: 0 20px 50px -12px rgba(34,211,238,0.55), inset 0 1px 0 rgba(255,255,255,0.6);
-        }
-        .n-brand {
-            background: linear-gradient(135deg, #fbcfe8 0%, #f472b6 50%, #db2777 100%);
-            box-shadow: 0 20px 50px -12px rgba(244,114,182,0.55), inset 0 1px 0 rgba(255,255,255,0.6);
-        }
-        .n-flower {
-            background: linear-gradient(135deg, #fef3c7 0%, #fbbf24 50%, #d97706 100%);
-            box-shadow: 0 20px 50px -12px rgba(251,191,36,0.55), inset 0 1px 0 rgba(255,255,255,0.6);
-        }
-        .n-ops {
-            background: linear-gradient(135deg, #a7f3d0 0%, #34d399 50%, #059669 100%);
-            box-shadow: 0 20px 50px -12px rgba(52,211,153,0.55), inset 0 1px 0 rgba(255,255,255,0.6);
-        }
-        .n-hub {
-            background: linear-gradient(135deg, #ddd6fe 0%, #a78bfa 50%, #7c3aed 100%);
-            box-shadow: 0 20px 50px -12px rgba(167,139,250,0.55), inset 0 1px 0 rgba(255,255,255,0.6);
-        }
-
-        .node-total {
-            width: 190px; height: 190px;
-            border-radius: 30px;
-            background:
-                conic-gradient(from 0deg,
-                    #a3e635, #22d3ee, #a78bfa, #f472b6, #fbbf24, #a3e635);
-            background-size: 300% 300%;
-            animation: pulse 4s ease-in-out infinite, gem-rotate 18s linear infinite;
-            z-index: 3;
-            position: relative;
-            overflow: hidden;
-        }
-        .node-total::after {
-            content: ""; position: absolute; inset: 3px;
-            border-radius: 28px;
-            background: linear-gradient(135deg, #d9f99d 0%, #84cc16 45%, #4d7c0f 100%);
-            z-index: 0;
-        }
-        .node-total .node-inner {
-            position: relative; z-index: 2;
-        }
-        @keyframes pulse {
-            0%, 100% { transform: translate(-50%, -50%) rotate(45deg) scale(1); }
-            50%      { transform: translate(-50%, -50%) rotate(45deg) scale(1.04); }
-        }
-        @keyframes gem-rotate {
-            from { background-position: 0% 50%; }
-            to   { background-position: 300% 50%; }
-        }
-        .node-total i { font-size: 2.1rem; }
-        .node-total .name { font-size: 1.25rem; font-weight: 900; }
-        .node-total .sub {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.7rem; opacity: 0.88; margin-top: 0.25rem; letter-spacing: 2px; font-weight: 700;
-        }
-
-        /* 다이아몬드 오라 */
-        .aura {
-            position: absolute; top: 50%; left: 50%;
-            width: 360px; height: 360px;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            background:
-                radial-gradient(circle, rgba(163,230,53,0.35) 0%, transparent 55%),
-                conic-gradient(from 0deg,
-                    rgba(163,230,53,0.2),
-                    rgba(34,211,238,0.18),
-                    rgba(167,139,250,0.2),
-                    rgba(244,114,182,0.18),
-                    rgba(251,191,36,0.2),
-                    rgba(163,230,53,0.2));
-            pointer-events: none;
-            animation: aura-breath 5s ease-in-out infinite, gem-rotate 24s linear infinite;
-            filter: blur(24px);
-        }
-        @keyframes aura-breath {
-            0%, 100% { opacity: 0.7; }
-            50%      { opacity: 1; }
-        }
-
-        /* 에이전트 바 — glass */
-        .agent-bar {
-            margin: 3.5rem auto 0;
-            max-width: 720px;
-            padding: 1.2rem 1.8rem;
-            background: linear-gradient(135deg, rgba(15,23,42,0.92) 0%, rgba(30,41,59,0.88) 100%);
-            color: #fff;
-            border-radius: 999px;
-            display: flex; align-items: center; justify-content: center;
-            gap: 0.9rem;
-            box-shadow:
-                0 20px 50px -12px rgba(15,23,42,0.4),
-                0 0 0 1px rgba(163,230,53,0.15),
-                inset 0 1px 0 rgba(255,255,255,0.08);
-            position: relative;
-            overflow: hidden;
-        }
-        .agent-bar::before {
-            content: ""; position: absolute; top: -50%; left: -20%;
-            width: 140%; height: 200%;
-            background: conic-gradient(from 0deg,
-                transparent, rgba(163,230,53,0.15), transparent, rgba(34,211,238,0.15), transparent);
-            animation: gem-rotate 8s linear infinite;
-            pointer-events: none;
-        }
-        .agent-bar > * { position: relative; z-index: 1; }
-        .agent-bar i {
-            font-size: 1.4rem;
-            background: linear-gradient(135deg, #a3e635, #22d3ee);
-            -webkit-background-clip: text; background-clip: text; color: transparent;
-            filter: drop-shadow(0 0 8px rgba(163,230,53,0.5));
-        }
-        .agent-bar .a-name { font-weight: 800; font-size: 1.05rem; letter-spacing: -0.3px; }
-        .agent-bar .a-sub { color: rgba(255,255,255,0.65); font-size: 0.85rem; }
-
-        /* 산업별 시나리오 ④ */
-        .scenario-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr);
-            gap: 1.2rem; margin-top: 2.8rem;
-        }
-        .scenario {
-            background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(255,255,255,0.6));
-            border: 1px solid rgba(255,255,255,0.85);
-            border-radius: 22px;
-            padding: 1.8rem 1.5rem;
-            transition: transform 0.3s cubic-bezier(.4,0,.2,1), box-shadow 0.3s;
-            backdrop-filter: blur(20px) saturate(160%);
-            -webkit-backdrop-filter: blur(20px) saturate(160%);
-            box-shadow:
-                0 20px 50px -18px rgba(15,23,42,0.15),
-                inset 0 1px 0 rgba(255,255,255,0.9);
-            position: relative; overflow: hidden;
-        }
-        .scenario::before {
-            content: ""; position: absolute; top: -60%; right: -40%;
-            width: 200px; height: 200px;
-            border-radius: 50%;
-            pointer-events: none; opacity: 0.5;
-            transition: opacity 0.3s;
-        }
-        .s-mfg::before { background: radial-gradient(circle, rgba(52,211,153,0.45), transparent 70%); }
-        .s-onl::before { background: radial-gradient(circle, rgba(34,211,238,0.45), transparent 70%); }
-        .s-log::before { background: radial-gradient(circle, rgba(251,191,36,0.45), transparent 70%); }
-        .scenario:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 30px 60px -20px rgba(15,23,42,0.22);
-        }
-        .scenario:hover::before { opacity: 0.8; }
-        .scenario-head {
-            display: flex; align-items: center; gap: 0.75rem;
-            margin-bottom: 1rem; padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(148,163,184,0.2);
-            position: relative;
-        }
-        .scenario-ico {
-            width: 44px; height: 44px;
-            display: flex; align-items: center; justify-content: center;
-            color: #fff; font-size: 1.25rem;
-            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-        }
-        .scenario-ico i { transform: rotate(0deg); }
-        .s-mfg .scenario-ico { background: linear-gradient(135deg, #6ee7b7, #34d399 55%, #059669); box-shadow: 0 6px 18px -4px rgba(52,211,153,0.55); }
-        .s-onl .scenario-ico { background: linear-gradient(135deg, #a5f3fc, #22d3ee 55%, #0891b2); box-shadow: 0 6px 18px -4px rgba(34,211,238,0.55); }
-        .s-log .scenario-ico { background: linear-gradient(135deg, #fde68a, #fbbf24 55%, #d97706); box-shadow: 0 6px 18px -4px rgba(251,191,36,0.55); }
-        .scenario-head h3 { font-size: 1.12rem; font-weight: 900; letter-spacing: -0.3px; color: var(--navy); }
-        .scenario p { color: #475569; font-size: 0.94rem; margin-bottom: 1.2rem; position: relative; }
-        .stack { display: flex; flex-wrap: wrap; gap: 0.45rem; position: relative; }
-        .chip {
-            display: inline-flex; align-items: center; gap: 0.35rem;
-            padding: 0.35rem 0.75rem; border-radius: 999px;
-            font-size: 0.78rem; font-weight: 700;
-            background: rgba(255,255,255,0.8);
-            border: 1px solid rgba(148,163,184,0.22);
-            color: var(--ink);
-            backdrop-filter: blur(8px);
-        }
-        .chip-dot {
-            width: 8px; height: 8px;
-            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-        }
-        .d-insight { background: var(--c-insight); box-shadow: 0 0 8px var(--c-insight); }
-        .d-brand   { background: var(--c-brand);   box-shadow: 0 0 8px var(--c-brand); }
-        .d-flower  { background: var(--c-flower);  box-shadow: 0 0 8px var(--c-flower); }
-        .d-ops     { background: var(--c-ops);     box-shadow: 0 0 8px var(--c-ops); }
-        .d-hub     { background: var(--c-hub);     box-shadow: 0 0 8px var(--c-hub); }
-        .d-total   { background: var(--c-total);   box-shadow: 0 0 8px var(--c-total); }
-        .tri-full {
-            margin-top: 2.2rem;
-            padding: 1.2rem 1.8rem;
-            background: linear-gradient(135deg, rgba(163,230,53,0.15), rgba(34,211,238,0.12), rgba(167,139,250,0.12));
-            border: 1px solid rgba(163,230,53,0.28);
-            border-radius: 18px;
-            text-align: center;
-            font-weight: 700; color: var(--ink);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px -12px rgba(132,204,22,0.25);
-        }
-        .tri-full i {
-            color: #84cc16;
-            filter: drop-shadow(0 0 6px rgba(132,204,22,0.6));
-            margin-right: 0.3rem;
-        }
-        .tri-full em {
-            font-style: normal;
-            background: linear-gradient(135deg, #84cc16, #22d3ee);
-            -webkit-background-clip: text; background-clip: text; color: transparent;
-            font-weight: 900;
-        }
-
-        /* 제품 카드 ⑤ */
-        .products-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr);
-            gap: 1.2rem; margin-top: 2.8rem;
-        }
-        .product {
-            background: linear-gradient(135deg, rgba(255,255,255,0.88), rgba(255,255,255,0.62));
-            border: 1px solid rgba(255,255,255,0.85);
-            border-radius: 22px;
-            padding: 1.8rem 1.6rem;
-            display: flex; flex-direction: column;
-            transition: transform 0.3s cubic-bezier(.4,0,.2,1), box-shadow 0.3s;
-            backdrop-filter: blur(22px) saturate(160%);
-            -webkit-backdrop-filter: blur(22px) saturate(160%);
-            box-shadow:
-                0 20px 50px -18px rgba(15,23,42,0.15),
-                inset 0 1px 0 rgba(255,255,255,0.9);
-            position: relative; overflow: hidden;
-        }
-        .product::before {
-            content: ""; position: absolute; top: -40%; right: -30%;
-            width: 200px; height: 200px;
-            border-radius: 50%;
-            pointer-events: none; opacity: 0.45;
-            transition: opacity 0.3s, transform 0.5s;
-        }
-        .p-insight::before { background: radial-gradient(circle, rgba(34,211,238,0.55), transparent 70%); }
-        .p-brand::before   { background: radial-gradient(circle, rgba(244,114,182,0.5), transparent 70%); }
-        .p-flower::before  { background: radial-gradient(circle, rgba(251,191,36,0.5), transparent 70%); }
-        .p-hub::before     { background: radial-gradient(circle, rgba(167,139,250,0.5), transparent 70%); }
-        .p-ops::before     { background: radial-gradient(circle, rgba(52,211,153,0.5), transparent 70%); }
-        .p-total::before   { background: radial-gradient(circle, rgba(163,230,53,0.5), transparent 70%); }
-        .product:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 32px 64px -20px rgba(15,23,42,0.25);
-        }
-        .product:hover::before { opacity: 0.75; transform: scale(1.15); }
-        .product-head {
-            display: flex; justify-content: space-between; align-items: flex-start;
-            margin-bottom: 1.1rem;
-            position: relative;
-        }
-        .product-ico {
-            width: 52px; height: 52px;
-            display: flex; align-items: center; justify-content: center;
-            color: #fff; font-size: 1.35rem;
-            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-            transition: transform 0.3s;
-        }
-        .product:hover .product-ico { transform: rotate(90deg); }
-        .product:hover .product-ico i { transform: rotate(-90deg); }
-        .product-ico i { transition: transform 0.3s; }
-        .p-insight .product-ico { background: linear-gradient(135deg, #a5f3fc, #22d3ee 55%, #0891b2); box-shadow: 0 10px 24px -6px rgba(34,211,238,0.55); }
-        .p-brand   .product-ico { background: linear-gradient(135deg, #fbcfe8, #f472b6 55%, #db2777); box-shadow: 0 10px 24px -6px rgba(244,114,182,0.55); }
-        .p-flower  .product-ico { background: linear-gradient(135deg, #fde68a, #fbbf24 55%, #d97706); box-shadow: 0 10px 24px -6px rgba(251,191,36,0.55); }
-        .p-hub     .product-ico { background: linear-gradient(135deg, #ddd6fe, #a78bfa 55%, #7c3aed); box-shadow: 0 10px 24px -6px rgba(167,139,250,0.55); }
-        .p-ops     .product-ico { background: linear-gradient(135deg, #a7f3d0, #34d399 55%, #059669); box-shadow: 0 10px 24px -6px rgba(52,211,153,0.55); }
-        .p-total   .product-ico { background: linear-gradient(135deg, #d9f99d, #a3e635 55%, #65a30d); box-shadow: 0 10px 24px -6px rgba(163,230,53,0.55); }
-
-        .badge {
-            display: inline-flex; align-items: center; gap: 0.35rem;
-            padding: 0.3rem 0.7rem; border-radius: 999px;
-            font-size: 0.72rem; font-weight: 800; letter-spacing: 0.3px;
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255,255,255,0.6);
-        }
-        .b-ga    { background: linear-gradient(135deg, rgba(187,247,208,0.85), rgba(134,239,172,0.75)); color: #14532d; }
-        .b-live  { background: linear-gradient(135deg, rgba(187,247,208,0.85), rgba(134,239,172,0.75)); color: #14532d; }
-        .b-beta  { background: linear-gradient(135deg, rgba(254,240,138,0.85), rgba(253,224,71,0.75)); color: #713f12; }
-        .b-dev   { background: linear-gradient(135deg, rgba(254,215,170,0.85), rgba(253,186,116,0.75)); color: #7c2d12; }
-        .b-plan  { background: linear-gradient(135deg, rgba(226,232,240,0.85), rgba(203,213,225,0.75)); color: #334155; }
-        .product h3 {
-            font-size: 1.2rem; font-weight: 900; letter-spacing: -0.5px;
-            margin-bottom: 0.35rem; position: relative;
-            color: var(--navy);
-        }
-        .product .one-liner {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.74rem; color: #0891b2;
-            letter-spacing: 1.5px; text-transform: uppercase;
-            margin-bottom: 0.9rem; font-weight: 700;
-            position: relative;
-        }
-        .product p {
-            color: #334155; font-size: 0.94rem; margin-bottom: 1.4rem; flex: 1;
-            position: relative; line-height: 1.6;
-        }
-        .product .cta {
-            display: inline-flex; align-items: center; gap: 0.45rem;
-            font-size: 0.9rem; font-weight: 700;
-            color: var(--ink); text-decoration: none;
-            padding: 0.65rem 1rem; border-radius: 12px;
-            background: rgba(255,255,255,0.8);
-            border: 1px solid rgba(148,163,184,0.28);
-            align-self: flex-start;
-            transition: transform 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s;
-            position: relative;
-            backdrop-filter: blur(8px);
-        }
-        .product .cta:hover {
-            border-color: #22d3ee;
-            color: #0891b2;
-            transform: translateX(3px);
-            box-shadow: 0 8px 20px -6px rgba(34,211,238,0.35);
-        }
-        .product .cta.disabled { opacity: 0.4; pointer-events: none; }
-
-        /* 에이전트 ⑥ */
-        .agent-section {
-            background:
-                radial-gradient(circle at 20% 30%, rgba(34,211,238,0.35), transparent 55%),
-                radial-gradient(circle at 80% 70%, rgba(163,230,53,0.3), transparent 55%),
-                linear-gradient(135deg, #0f172a 0%, #1e293b 55%, #0f172a 100%);
-            color: #fff;
-            border-radius: 28px;
-            margin: 0 1.5rem;
-            padding: 4rem 2rem;
-            position: relative;
-            overflow: hidden;
-            box-shadow:
-                0 40px 80px -20px rgba(15,23,42,0.3),
-                0 0 0 1px rgba(255,255,255,0.05);
-        }
-        .agent-section::before {
-            content: ""; position: absolute; inset: 0;
-            background-image:
-                linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-            background-size: 36px 36px;
-            mask-image: radial-gradient(circle at 50% 50%, black 0%, transparent 75%);
-            -webkit-mask-image: radial-gradient(circle at 50% 50%, black 0%, transparent 75%);
-            pointer-events: none;
-        }
-        .agent-section .container { padding: 0; position: relative; z-index: 1; }
-        .agent-section .eyebrow {
-            background: rgba(163,230,53,0.15);
-            color: #a3e635;
-            border-color: rgba(163,230,53,0.3);
-            box-shadow: 0 6px 20px -4px rgba(163,230,53,0.3);
-        }
-        .agent-section .eyebrow::before { background: #a3e635; box-shadow: 0 0 10px #a3e635; }
-        .agent-section h2 {
-            color: #fff;
-            background: linear-gradient(135deg, #fff 0%, #a3e635 60%, #22d3ee 100%);
-            -webkit-background-clip: text; background-clip: text; color: transparent;
-        }
-        .agent-section .lead { color: rgba(255,255,255,0.72); }
-        .agent-feats {
-            display: grid; grid-template-columns: repeat(3, 1fr);
-            gap: 1.1rem; margin-top: 2.2rem;
-        }
-        .agent-feat {
-            padding: 1.5rem 1.3rem;
-            background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 18px;
-            backdrop-filter: blur(14px);
-            transition: transform 0.3s, border-color 0.3s;
-        }
-        .agent-feat:hover {
-            transform: translateY(-4px);
-            border-color: rgba(163,230,53,0.3);
-        }
-        .agent-feat i {
-            display: inline-flex; width: 42px; height: 42px;
-            align-items: center; justify-content: center;
-            background: linear-gradient(135deg, #a3e635, #22d3ee);
-            color: #0f172a; font-size: 1.15rem; margin-bottom: 0.8rem;
-            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-            box-shadow: 0 8px 20px -4px rgba(163,230,53,0.5);
-        }
-        .agent-feat b { display: block; font-size: 1.02rem; margin-bottom: 0.35rem; color: #fff; letter-spacing: -0.2px; }
-        .agent-feat p { color: rgba(255,255,255,0.68); font-size: 0.9rem; line-height: 1.6; }
-        .agent-cta { margin-top: 2rem; text-align: center; }
-
-        /* 요금 ⑦ */
-        .pricing { text-align: center; }
-        .pricing-note {
-            max-width: 700px; margin: 1.8rem auto 0;
-            padding: 2rem 2rem;
-            background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(255,255,255,0.6));
-            border: 1px solid rgba(255,255,255,0.9);
-            border-radius: 20px;
-            color: #475569;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 20px 50px -18px rgba(34,211,238,0.25), inset 0 1px 0 rgba(255,255,255,0.9);
-            line-height: 1.7;
-        }
-        .pricing-note b { color: var(--navy); }
-
-        /* 통합 시스템 안내 ⑧ */
-        .current-system {
-            position: relative;
-        }
-        .cs-wrap {
-            max-width: 860px; margin: 0 auto; text-align: center;
-            padding: 3rem 2.2rem;
-            background: linear-gradient(135deg, rgba(163,230,53,0.12), rgba(34,211,238,0.1), rgba(167,139,250,0.1));
-            border: 1px solid rgba(255,255,255,0.8);
-            border-radius: 28px;
-            backdrop-filter: blur(20px) saturate(160%);
-            box-shadow: 0 30px 70px -24px rgba(34,211,238,0.25), inset 0 1px 0 rgba(255,255,255,0.9);
-        }
-        .cs-wrap > i:first-child {
-            display: inline-flex; width: 58px; height: 58px;
-            align-items: center; justify-content: center;
-            background: linear-gradient(135deg, #a3e635, #22d3ee);
-            color: #fff;
-            font-size: 1.8rem;
-            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-            margin-bottom: 1.2rem;
-            box-shadow: 0 12px 30px -6px rgba(132,204,22,0.5);
-        }
-        .cs-wrap h2 { margin-bottom: 1rem; }
-        .cs-wrap p { color: #334155; max-width: 640px; margin: 0 auto 1.8rem; font-size: 1.02rem; line-height: 1.7; }
-
-        /* 푸터 */
-        footer {
-            padding: 3rem 1.5rem 2.5rem;
-            text-align: center;
-            color: var(--muted);
-            font-size: 0.85rem;
-            position: relative;
-        }
-        footer::before {
-            content: ""; position: absolute; top: 0; left: 50%;
-            transform: translateX(-50%);
-            width: 140px; height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(34,211,238,0.4), transparent);
-        }
-        footer .foot-brand { font-weight: 800; color: var(--ink); margin-bottom: 0.4rem; letter-spacing: -0.3px; }
-        footer a { color: var(--muted); text-decoration: none; margin: 0 0.6rem; transition: color 0.2s; }
-        footer a:hover { color: #0891b2; }
-
-        /* 모바일 */
-        @media (max-width: 860px) {
-            .pain-grid, .scenario-grid, .products-grid, .agent-feats {
-                grid-template-columns: 1fr;
-            }
-        }
-        @media (max-width: 640px) {
-            section { padding: 3.8rem 0; }
-            .nav-toggle { display: flex; }
-            /* 기본은 숨김, 햄버거로 열면 드롭다운 */
-            .nav-links {
-                display: none;
-                position: absolute; top: 100%; left: 0; right: 0;
-                flex-direction: column; gap: 0;
-                background: rgba(255,255,255,0.97);
-                backdrop-filter: blur(24px) saturate(180%);
-                -webkit-backdrop-filter: blur(24px) saturate(180%);
-                border-bottom: 1px solid rgba(148,163,184,0.2);
-                box-shadow: 0 12px 32px -12px rgba(14,116,144,0.25);
-                padding: 0.4rem 0;
-            }
-            .nav-links.open { display: flex; }
-            .nav-links a {
-                padding: 0.85rem 1.5rem; font-size: 1rem;
-                border-bottom: 1px solid rgba(148,163,184,0.12);
-            }
-            .nav-links a:last-child { border-bottom: none; }
-            .stage {
-                aspect-ratio: auto;
-                display: flex; flex-direction: column;
-                gap: 1.5rem; align-items: center;
-                padding: 1rem 0;
-            }
-            .wire { display: none; }
-            .aura { display: none; }
-            .node {
-                position: static;
-                transform: rotate(45deg);
-                width: 130px; height: 130px;
-                animation: none;
-            }
-            .node:hover { transform: rotate(45deg); }
-            .node-total {
-                width: 160px; height: 160px;
-                animation: gem-rotate 18s linear infinite;
-                transform: rotate(45deg);
-                order: -1;
-            }
-            .agent-bar { margin: 2.5rem 0.75rem 0; flex-wrap: wrap; padding: 1rem 1.2rem; }
-            .agent-section { margin: 0 0.75rem; padding: 2.8rem 1.4rem; border-radius: 22px; }
-            .cs-wrap { padding: 2.2rem 1.4rem; border-radius: 22px; }
-            .tri-arrow { transform: rotate(90deg); }
-            .hero h1 { letter-spacing: -1px; }
-        }
-    </style>
-
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5909036477926766"
-         crossorigin="anonymous"></script>
+<!-- Google AdSense (소유권 확인) -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5909036477926766" crossorigin="anonymous"></script>
 </head>
 <body>
 
-<!-- 내비 -->
 <nav class="nav">
-    <div class="nav-inner">
-        <div class="brand">
-            <span class="brand-mark">매</span>
-            <span>매실 패밀리</span>
-        </div>
-        <div class="nav-links" id="navLinks">
-            <a href="https://blog.maesil.net/"><b>블로그</b></a>
-            <a href="#products">매실인사이트</a>
-            <a href="#company">회사 소개</a>
-        </div>
-        <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="navLinks">
-            <span></span><span></span><span></span>
-        </button>
+  <div class="wrap nav-in">
+    <a class="brand" href="#top"><span class="brand-mark">매</span>매실패밀리</a>
+    <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
+    <div class="nav-links" id="navLinks">
+      <a href="#service">서비스</a>
+      <a href="#flow">진행 방식</a>
+      <a href="#case">사례</a>
+      <a href="#tech">매실 기술</a>
+      <a href="https://blog.maesil.net/">블로그</a>
+      <a class="cta" href="https://shop.maesil.net/contact">상담 신청</a>
     </div>
+  </div>
 </nav>
 <script>
-    (function () {
-        var t = document.getElementById('navToggle');
-        var l = document.getElementById('navLinks');
-        if (!t || !l) return;
-        t.addEventListener('click', function () {
-            var open = l.classList.toggle('open');
-            t.classList.toggle('open', open);
-            t.setAttribute('aria-expanded', open ? 'true' : 'false');
-            t.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
-        });
-        // 링크 클릭 시 메뉴 닫기
-        l.querySelectorAll('a').forEach(function (a) {
-            a.addEventListener('click', function () {
-                l.classList.remove('open');
-                t.classList.remove('open');
-                t.setAttribute('aria-expanded', 'false');
-                t.setAttribute('aria-label', '메뉴 열기');
-            });
-        });
-    })();
+(function(){var t=document.getElementById('navToggle'),l=document.getElementById('navLinks');if(!t||!l)return;
+function set(o){l.classList.toggle('open',o);t.setAttribute('aria-expanded',o?'true':'false');t.setAttribute('aria-label',o?'메뉴 닫기':'메뉴 열기');}
+t.addEventListener('click',function(){set(!l.classList.contains('open'));});
+l.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){set(false);});});})();
 </script>
 
-<!-- ① 히어로 — 매실K 셀러 콘텐츠 전면 -->
-<section class="hero">
-    <div class="container">
-        <div class="kicker">매실K · 온라인 셀러 인사이트</div>
-        <h1>온라인에서 파는<br>모든 셀러를 위한 실전 인사이트</h1>
-        <p class="subcopy">
-            쿠팡 · 스마트스토어 · 자사몰 — 현장에서 검증한 판매 전략과 데이터를 매주 나눕니다.<br>
-            그 인사이트를 도구로 만든 것이 <b>매실인사이트</b>입니다.
-        </p>
-        <div class="cta-row">
-            <a href="https://blog.maesil.net/" class="btn btn-primary">
-                <i class="bi bi-journal-text"></i>
-                블로그 보러가기
-            </a>
-            <a href="#products" class="btn btn-ghost">
-                <i class="bi bi-graph-up-arrow"></i>
-                매실인사이트 알아보기
-            </a>
-        </div>
+<!-- ① 첫 화면 -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="eyebrow">MAESIL FAMILY</div>
+    <h1>온라인 사업,<br>구축만 하고 끝내지 않습니다.</h1>
+    <p class="lead">브랜드 기획부터 쇼핑몰, 상세페이지, 광고, 매출 분석까지 — 매실패밀리가 직접 만들고, 운영하고, 함께 키웁니다.</p>
+    <div class="cta-row">
+      <a class="btn btn-dark" href="https://shop.maesil.net/contact"><i class="bi bi-chat-dots"></i>상담 신청</a>
+      <a class="btn btn-line" href="#case"><i class="bi bi-layers"></i>구축 사례 보기</a>
     </div>
+    <div class="steps3" aria-label="매실패밀리가 하는 일">
+      <span><i class="bi bi-hammer"></i> 구축</span>
+      <span><i class="bi bi-gear"></i> 운영</span>
+      <span><i class="bi bi-graph-up-arrow"></i> 성장</span>
+    </div>
+  </div>
+</header>
+
+<!-- ② 이런 회사와 일합니다 -->
+<section id="fit">
+  <div class="wrap">
+    <div class="eyebrow">WHO WE WORK WITH</div>
+    <h2>이런 회사와 일합니다</h2>
+    <p class="lead">좋은 제품은 있는데, 온라인은 손이 닿지 않는 곳. 프로그램을 배우실 필요 없이 저희가 대신 합니다.</p>
+    <div class="grid g3">
+      <div class="card"><i class="ic bi bi-person-x"></i><h3>온라인 담당자가 없다</h3><p>매장·생산만으로도 바쁜데 쇼핑몰·광고·블로그까지 챙길 사람이 없습니다.</p></div>
+      <div class="card"><i class="ic bi bi-shop-window"></i><h3>쇼핑몰은 만들었는데 손이 안 간다</h3><p>처음 만들어 둔 그대로 상품 정보도, 상세페이지도 멈춰 있습니다.</p></div>
+      <div class="card"><i class="ic bi bi-question-circle"></i><h3>광고비는 나가는데 남는지 모르겠다</h3><p>어느 채널에서 얼마가 남는지, 무엇을 늘리고 줄일지 판단할 숫자가 없습니다.</p></div>
+    </div>
+  </div>
 </section>
 
-<!-- ①-b 셀러와 함께하는 매실K 블로그 (blog.maesil.net 최신 글 실시간 로드) -->
-<section class="blogfeed" id="blog">
-    <div class="container">
-        <div style="text-align:center;">
-            <div class="eyebrow">MAESIL BLOG</div>
-            <h2 class="h2">셀러와 함께하는 매실K 블로그</h2>
-            <p class="lead" style="margin: 0 auto;">
-                온라인 판매·브랜드 운영 현장에서 나온 실전 인사이트를 매주 나눕니다.
-            </p>
-        </div>
-
-        <div class="bf-grid" id="bfGrid" aria-live="polite">
-            <div class="bf-loading">최신 글을 불러오는 중…</div>
-        </div>
-
-        <div style="text-align:center; margin-top: 2.4rem;">
-            <a href="https://blog.maesil.net/" class="btn btn-ghost">
-                <i class="bi bi-journal-text"></i>
-                블로그 전체 보기
-            </a>
-        </div>
+<!-- ③ 서비스 3가지 -->
+<section id="service" class="soft">
+  <div class="wrap">
+    <div class="eyebrow">SERVICE</div>
+    <h2>필요한 만큼, 세 가지로 맡기세요</h2>
+    <p class="lead">대표님은 자료를 주시고 결정만 하시면 됩니다. 나머지는 매실이 합니다.</p>
+    <div class="grid g3">
+      <div class="card svc">
+        <span class="for">온라인 진출 · 리뉴얼</span>
+        <h3>브랜드 구축</h3>
+        <ul>
+          <li><i class="bi bi-check2"></i>브랜드 · 디자인 컨셉 정리</li>
+          <li><i class="bi bi-check2"></i>자사몰 · 브랜드 소개 페이지</li>
+          <li><i class="bi bi-check2"></i>상세페이지 · 브랜드 스토리</li>
+          <li><i class="bi bi-check2"></i>결제 · 배송 · 약관 등 판매 환경</li>
+        </ul>
+        <div class="you"><b>대표님이 하실 일</b> — 제품·사진 자료 전달, 방향 결정</div>
+      </div>
+      <div class="card svc">
+        <span class="for">담당자가 없거나 운영이 어려운 곳</span>
+        <h3>통합 운영대행</h3>
+        <ul>
+          <li><i class="bi bi-check2"></i>상품 등록 · 정보 관리</li>
+          <li><i class="bi bi-check2"></i>블로그 · 검색 노출(SEO)</li>
+          <li><i class="bi bi-check2"></i>광고 운영 · 성과 관리</li>
+          <li><i class="bi bi-check2"></i>주문 · 문의 흐름 관리, 월간 보고</li>
+        </ul>
+        <div class="you"><b>대표님이 하실 일</b> — 신상품·행사 결정, 월 1회 보고 확인</div>
+      </div>
+      <div class="card svc">
+        <span class="for">이미 매출이 나는 중소 · 중견기업</span>
+        <h3>성장 파트너십</h3>
+        <ul>
+          <li><i class="bi bi-check2"></i>채널별 판매 전략</li>
+          <li><i class="bi bi-check2"></i>상세페이지 · 구매 전환 개선</li>
+          <li><i class="bi bi-check2"></i>반복 업무 자동화</li>
+          <li><i class="bi bi-check2"></i>목표 대비 성과 관리</li>
+        </ul>
+        <div class="you"><b>대표님이 하실 일</b> — 목표와 예산 합의, 분기별 점검</div>
+      </div>
     </div>
+  </div>
 </section>
 
-<style>
-    .blogfeed .bf-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 1.4rem;
-        margin-top: 2.6rem;
-    }
-    .bf-card {
-        display: flex; flex-direction: column;
-        background: var(--glass-strong, rgba(255,255,255,0.75));
-        border: 1px solid var(--line);
-        border-radius: 18px;
-        overflow: hidden;
-        text-decoration: none;
-        color: var(--navy);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 10px 30px -14px rgba(15,23,42,0.25);
-        transition: transform 0.2s cubic-bezier(.4,0,.2,1), box-shadow 0.2s;
-    }
-    .bf-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 20px 44px -16px rgba(15,23,42,0.32);
-    }
-    .bf-thumb {
-        aspect-ratio: 16 / 9;
-        background: linear-gradient(135deg, #a3e635 0%, #22d3ee 55%, #a78bfa 100%);
-        background-size: cover; background-position: center;
-    }
-    .bf-body { padding: 1.15rem 1.25rem 1.35rem; display: flex; flex-direction: column; gap: 0.5rem; flex: 1; }
-    .bf-cat {
-        font-family: 'Space Grotesk', 'Inter', sans-serif;
-        font-size: 0.68rem; letter-spacing: 1.5px; text-transform: uppercase;
-        font-weight: 700; color: #0891b2;
-    }
-    .bf-title { font-size: 1.04rem; font-weight: 800; line-height: 1.35; letter-spacing: -0.3px; }
-    .bf-excerpt { font-size: 0.9rem; color: var(--muted); line-height: 1.55; flex: 1; }
-    .bf-date { font-size: 0.78rem; color: var(--muted); font-weight: 500; }
-    .bf-loading { grid-column: 1 / -1; text-align: center; color: var(--muted); padding: 2rem 0; }
-</style>
+<!-- ④ 진행 방식 -->
+<section id="flow">
+  <div class="wrap">
+    <div class="eyebrow">HOW WE WORK</div>
+    <h2>이렇게 진행합니다</h2>
+    <ol class="flow" style="padding:0">
+      <li><h3>진단</h3><p>지금 판매 채널·상품·고민을 듣고, 맡기실 범위와 순서를 제안합니다.</p></li>
+      <li><h3>구축</h3><p>컨셉을 정하고 사이트·상세페이지를 만든 뒤, 결제·배송까지 갖춰 문을 엽니다.</p></li>
+      <li><h3>운영 · 보고</h3><p>매달 정해진 일을 하고, 한 일과 숫자를 보고서로 드립니다.</p></li>
+      <li><h3>개선</h3><p>숫자를 보고 다음 달에 늘릴 것과 줄일 것을 함께 정합니다.</p></li>
+    </ol>
+    <div class="report">
+      <div class="t"><i class="bi bi-file-earmark-bar-graph"></i> 매달 받으시는 보고서</div>
+      <div><b>매출 · 주문</b><span>채널별 매출과 주문 흐름</span></div>
+      <div><b>광고 성과</b><span>쓴 돈과 남은 돈</span></div>
+      <div><b>작업 내역</b><span>한 달 동안 한 일</span></div>
+      <div><b>다음 달 제안</b><span>무엇을 바꿀지</span></div>
+    </div>
+  </div>
+</section>
 
+<!-- ⑤ 구축 사례 — 회사명 없이, 한 일로 보여 준다 -->
+<section id="case" class="soft">
+  <div class="wrap">
+    <div class="eyebrow">CASE</div>
+    <h2>구축 사례 — 한식 외식 · 가정간편식 브랜드</h2>
+    <p class="lead">매장 중심으로 운영하던 브랜드를 온라인에서도 같은 무게로 보이도록, 브랜드부터 판매 환경까지 새로 세웠습니다.</p>
+    <div class="case-head">
+      <span class="tag">브랜드 구축</span><span class="tag">리뉴얼</span><span class="tag">자사몰</span>
+    </div>
+    <div class="grid g3">
+      <div class="card"><i class="ic bi bi-compass"></i><h3>브랜드 컨셉</h3><p>매장의 본업과 온라인 상품을 하나의 이야기로 묶는 브랜드 방향을 정리했습니다.</p></div>
+      <div class="card"><i class="ic bi bi-palette"></i><h3>디자인 컨셉</h3><p>전통 한옥·한지 결의 고급 한식 톤. 브랜드 소개는 무게 있게, 구매 화면은 밝고 간결하게 나눴습니다.</p></div>
+      <div class="card"><i class="ic bi bi-phone"></i><h3>상세페이지 컨셉</h3><p>폰에서 내려 읽는 세로 구성, 한 장면에 한 메시지. 실제 제품 사진과 연출 이미지를 구분했습니다.</p></div>
+      <div class="card"><i class="ic bi bi-book"></i><h3>브랜드 스토리</h3><p>원재료·조리 방식·손질 과정을 포장 표시사항과 맞춰 사실대로 쓰고, 보관·조리 안내와 자주 묻는 질문을 붙였습니다.</p></div>
+      <div class="card"><i class="ic bi bi-arrow-repeat"></i><h3>리뉴얼</h3><p>기존 상세페이지와 사이트를 새 컨셉으로 다시 구성했습니다. 쓰던 주소와 QR은 그대로 열립니다.</p></div>
+      <div class="card"><i class="ic bi bi-bag-check"></i><h3>판매 환경</h3><p>자사몰, 냉동 배송 묶음 규칙, 결제 심사 준비, 이용약관·개인정보처리방침까지 갖췄습니다.</p></div>
+    </div>
+    <p class="case-note">고객사 요청으로 회사명은 밝히지 않습니다. 운영 성과는 데이터가 쌓이면 이곳에 더합니다.</p>
+  </div>
+</section>
+
+<!-- ⑥ 요금 — 금액은 상담 후 -->
+<section id="price">
+  <div class="wrap">
+    <div class="eyebrow">PRICING</div>
+    <h2>요금은 이렇게 나뉩니다</h2>
+    <p class="lead">상품 수 · 판매 채널 · 맡기실 업무 범위에 따라 달라서, 상담 뒤에 견적을 드립니다.</p>
+    <div class="price">
+      <div class="card"><h3><i class="bi bi-hammer" style="color:var(--accent)"></i>초기 구축</h3><p>브랜드·디자인 컨셉, 자사몰, 상세페이지, 판매 환경을 만드는 한 번의 비용입니다.</p></div>
+      <div class="card"><h3><i class="bi bi-calendar-check" style="color:var(--accent)"></i>월 운영관리</h3><p>매달 하는 운영 업무와 월간 보고입니다. 맡기신 범위만큼만 받습니다.</p></div>
+      <div class="card"><h3><i class="bi bi-receipt" style="color:var(--accent)"></i>별도 비용</h3><p>광고비, 사진 촬영, 도메인, 결제 수수료처럼 실제로 나가는 돈은 따로 보여 드립니다.</p></div>
+    </div>
+    <div class="price-cta">
+      <p>우리 회사는 어디까지 맡기면 될까요?</p>
+      <a class="btn btn-dark" href="https://shop.maesil.net/contact"><i class="bi bi-chat-dots"></i>견적 상담 신청</a>
+    </div>
+  </div>
+</section>
+
+<!-- ⑦ 매실 기술 -->
+<section id="tech" class="soft tech">
+  <div class="wrap">
+    <div class="eyebrow">TECHNOLOGY</div>
+    <h2>반복 업무는 직접 만든 도구가 합니다</h2>
+    <p class="lead">매실은 온라인 판매를 직접 해 오며 필요한 도구를 만들었습니다. 사람이 하던 반복 업무를 줄인 만큼, 고객사 일에 더 많은 시간을 씁니다.</p>
+    <div class="grid g4">
+      <div class="card"><span class="name">매실인사이트</span><span class="role">분석 · 정산</span><p>채널별 매출·광고·정산을 한곳에 모아 숫자로 봅니다.</p></div>
+      <div class="card"><span class="name">매실스튜디오</span><span class="role">콘텐츠</span><p>상세페이지·블로그·소식 글을 빠르고 일정한 품질로 만듭니다.</p></div>
+      <div class="card"><span class="name">매실샵</span><span class="role">쇼핑몰 · 주문</span><p>자사몰과 주문·배송·결제를 운영합니다.</p></div>
+      <div class="card"><span class="name">매실에이전트</span><span class="role">자동화</span><p>보고·점검 같은 반복 업무를 대신 실행합니다.</p></div>
+    </div>
+    <p class="self">매실인사이트를 직접 쓰고 계신가요? <a href="https://maesil-insight.com">매실인사이트 바로가기 →</a></p>
+  </div>
+</section>
+
+<!-- ⑧ 블로그 — 크롤 발견용 링크도 겸한다 -->
+<section id="blog">
+  <div class="wrap">
+    <div class="eyebrow">MAESIL BLOG</div>
+    <h2>매실K 블로그</h2>
+    <p class="lead">온라인 판매·브랜드 운영 현장에서 나온 이야기를 나눕니다.</p>
+    <div class="bf-grid" id="bfGrid" aria-live="polite"><div class="bf-loading">최신 글을 불러오는 중…</div></div>
+    <div style="margin-top:26px"><a class="btn btn-line" href="https://blog.maesil.net/"><i class="bi bi-journal-text"></i>블로그 전체 보기</a></div>
+  </div>
+</section>
 <script>
-(function () {
-    var API = 'https://blog.maesil.net/wp-json/wp/v2/posts?per_page=6&_embed=1';
-    var grid = document.getElementById('bfGrid');
-    function esc(s) { var d = document.createElement('div'); d.textContent = s == null ? '' : s; return d.innerHTML; }
-    function strip(html) { var d = document.createElement('div'); d.innerHTML = html || ''; return (d.textContent || '').trim(); }
-    fetch(API, { credentials: 'omit' })
-        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-        .then(function (posts) {
-            if (!Array.isArray(posts) || !posts.length) { grid.innerHTML = ''; return; }
-            grid.innerHTML = posts.map(function (p) {
-                var emb = p._embedded || {};
-                var media = (emb['wp:featuredmedia'] || [])[0];
-                var img = media && media.source_url ? media.source_url : '';
-                var term = ((emb['wp:term'] || [])[0] || [])[0];
-                var cat = term && term.name ? term.name : '매실K';
-                var title = strip(p.title && p.title.rendered);
-                var ex = strip(p.excerpt && p.excerpt.rendered);
-                if (ex.length > 90) ex = ex.slice(0, 90) + '…';
-                var dt = new Date(p.date);
-                var date = isNaN(dt.getTime()) ? '' :
-                    dt.getFullYear() + '.' + ('0' + (dt.getMonth() + 1)).slice(-2) + '.' + ('0' + dt.getDate()).slice(-2);
-                var thumb = img
-                    ? '<div class="bf-thumb" style="background-image:url(\'' + encodeURI(img) + '\')"></div>'
-                    : '<div class="bf-thumb"></div>';
-                return '<a class="bf-card" href="' + esc(p.link) + '">'
-                    + thumb
-                    + '<div class="bf-body">'
-                    + '<span class="bf-cat">' + esc(cat) + '</span>'
-                    + '<div class="bf-title">' + esc(title) + '</div>'
-                    + '<div class="bf-excerpt">' + esc(ex) + '</div>'
-                    + '<span class="bf-date">' + esc(date) + '</span>'
-                    + '</div></a>';
-            }).join('');
-        })
-        .catch(function () {
-            grid.innerHTML = '<div class="bf-loading">블로그 글을 불러오지 못했습니다. '
-                + '<a href="https://blog.maesil.net/" style="color:#0891b2;">블로그로 이동 →</a></div>';
-        });
+(function(){
+  var API='https://blog.maesil.net/wp-json/wp/v2/posts?per_page=6&_embed=1';
+  var grid=document.getElementById('bfGrid');
+  function esc(s){var d=document.createElement('div');d.textContent=s==null?'':s;return d.innerHTML;}
+  function strip(h){var d=document.createElement('div');d.innerHTML=h||'';return (d.textContent||'').trim();}
+  fetch(API,{credentials:'omit'}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(function(posts){
+    if(!Array.isArray(posts)||!posts.length){grid.innerHTML='';return;}
+    grid.innerHTML=posts.map(function(p){
+      var emb=p._embedded||{},media=(emb['wp:featuredmedia']||[])[0],img=media&&media.source_url?media.source_url:'';
+      var term=((emb['wp:term']||[])[0]||[])[0],cat=term&&term.name?term.name:'매실K';
+      var title=strip(p.title&&p.title.rendered),ex=strip(p.excerpt&&p.excerpt.rendered);if(ex.length>90)ex=ex.slice(0,90)+'…';
+      var dt=new Date(p.date),date=isNaN(dt.getTime())?'':dt.getFullYear()+'.'+('0'+(dt.getMonth()+1)).slice(-2)+'.'+('0'+dt.getDate()).slice(-2);
+      var thumb=img?'<div class="bf-thumb" style="background-image:url(\''+encodeURI(img)+'\')"></div>':'<div class="bf-thumb"></div>';
+      return '<a class="bf-card" href="'+esc(p.link)+'">'+thumb+'<div class="bf-body"><span class="bf-cat">'+esc(cat)+'</span><div class="bf-title">'+esc(title)+'</div><div class="bf-excerpt">'+esc(ex)+'</div><span class="bf-date">'+esc(date)+'</span></div></a>';
+    }).join('');
+  }).catch(function(){grid.innerHTML='<div class="bf-loading">글을 불러오지 못했습니다. <a href="https://blog.maesil.net/" style="color:var(--accent)">블로그로 이동 →</a></div>';});
 })();
 </script>
 
-<!-- ── 회사 소개 (매실 패밀리) — 블로그 아래 secondary ── -->
-<section id="company" style="padding: 4rem 0 0; text-align:center;">
-    <div class="container">
-        <div class="eyebrow">ABOUT · 매실 패밀리</div>
-        <h2 class="h2">매실K를 만드는 회사, 매실 패밀리</h2>
-        <p class="lead" style="margin:0 auto;">
-            셀러를 위한 콘텐츠(매실K)와 데이터 도구(매실인사이트)를 만드는 팀입니다.
-            아래는 우리가 만들어가는 제품 생태계입니다.
-        </p>
+<!-- ⑨ 상담 신청 -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <h2>지금 상황부터 들려주세요</h2>
+    <p class="lead">무엇부터 해야 할지 모르셔도 괜찮습니다. 판매 채널과 고민을 듣고, 맡기실 범위와 순서를 제안드립니다.</p>
+    <div class="cta-row" style="margin-top:28px">
+      <a class="btn btn-dark" href="https://shop.maesil.net/contact"><i class="bi bi-chat-dots"></i>상담 신청</a>
+      <a class="btn btn-line" href="tel:0552552322"><i class="bi bi-telephone"></i>055-255-2322</a>
     </div>
+  </div>
 </section>
 
-<!-- ② 문제 정의 -->
-<section class="problem" id="problem">
-    <div class="container problem-wrap">
-        <div class="eyebrow">PROBLEM</div>
-        <h2>
-            제조·유통·물류 3업을 같이 하는 대표님,<br>
-            매일 아침 <em>세 개의 스프레드시트</em>를 보고 계신가요?
-        </h2>
-        <p class="lead" style="margin: 0 auto;">
-            산업마다 다른 시스템. 엑셀로 합치다 보면 숫자가 어긋나고, 결정은 늦어지고, 경영자의 맹점은 커집니다.
-        </p>
-        <div class="pain-grid">
-            <div class="pain">
-                <i class="bi bi-file-earmark-spreadsheet"></i>
-                <b>시스템 3개 · 지표 3개</b>
-                <p>ERP, 쇼핑몰 어드민, WMS가 각자 따로. 매출·재고·배송이 같은 기준으로 합쳐지지 않습니다.</p>
-            </div>
-            <div class="pain">
-                <i class="bi bi-exclamation-diamond"></i>
-                <b>데이터 단절 · 반복 입력</b>
-                <p>같은 주문을 세 번 옮겨 적습니다. 어디서 틀렸는지 찾는 데 하루가 갑니다.</p>
-            </div>
-            <div class="pain">
-                <i class="bi bi-eye-slash"></i>
-                <b>경영자 맹점</b>
-                <p>진짜 남는 장사인지, 어느 채널이 마진을 깎고 있는지 한 화면에서 볼 수 없습니다.</p>
-            </div>
-        </div>
+<footer>
+  <div class="wrap">
+    <div class="links">
+      <a href="mailto:contact@maesil.net">contact@maesil.net</a>
+      <a href="/notice/">공고</a>
+      <a href="https://blog.maesil.net/">블로그</a>
+      <a href="https://gbl.maesil.net/gbl">GBL Note — 포켓몬GO 실측 메타</a>
     </div>
-</section>
-
-<!-- ③ 솔루션 — 패밀리 다이어그램 -->
-<section class="solution" id="solution">
-    <div class="container">
-        <div style="text-align:center;">
-            <div class="eyebrow">SOLUTION</div>
-            <h2 class="h2">매실 패밀리 — 다섯 개의 전문 SaaS, 하나의 컨트롤타워</h2>
-            <p class="lead" style="margin: 0 auto;">
-                중앙의 <b>매실토탈</b>이 다섯 제품을 통합 대시보드로 엮고, 아래 <b>매실에이전트</b>가 보고·요약·의사결정 제안까지 담당합니다.
-            </p>
-        </div>
-
-        <div class="stage">
-            <div class="aura"></div>
-
-            <svg class="wire" viewBox="0 0 780 780" preserveAspectRatio="xMidYMid meet">
-                <defs>
-                    <linearGradient id="g-insight" x1="50%" y1="50%" x2="50%" y2="13%">
-                        <stop offset="0%" stop-color="#5a9e28" stop-opacity="0.5"/>
-                        <stop offset="100%" stop-color="#06b6d4" stop-opacity="0.8"/>
-                    </linearGradient>
-                    <linearGradient id="g-brand" x1="50%" y1="50%" x2="85%" y2="37%">
-                        <stop offset="0%" stop-color="#5a9e28" stop-opacity="0.5"/>
-                        <stop offset="100%" stop-color="#ec4899" stop-opacity="0.8"/>
-                    </linearGradient>
-                    <linearGradient id="g-flower" x1="50%" y1="50%" x2="71%" y2="82%">
-                        <stop offset="0%" stop-color="#5a9e28" stop-opacity="0.5"/>
-                        <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.8"/>
-                    </linearGradient>
-                    <linearGradient id="g-ops" x1="50%" y1="50%" x2="29%" y2="82%">
-                        <stop offset="0%" stop-color="#5a9e28" stop-opacity="0.5"/>
-                        <stop offset="100%" stop-color="#10b981" stop-opacity="0.8"/>
-                    </linearGradient>
-                    <linearGradient id="g-hub" x1="50%" y1="50%" x2="15%" y2="37%">
-                        <stop offset="0%" stop-color="#5a9e28" stop-opacity="0.5"/>
-                        <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0.8"/>
-                    </linearGradient>
-                </defs>
-                <line x1="390" y1="390" x2="390" y2="90"   stroke="url(#g-insight)" stroke-width="3" stroke-linecap="round"/>
-                <line x1="390" y1="390" x2="675" y2="297"  stroke="url(#g-brand)"   stroke-width="3" stroke-linecap="round"/>
-                <line x1="390" y1="390" x2="566" y2="633"  stroke="url(#g-flower)"  stroke-width="3" stroke-linecap="round"/>
-                <line x1="390" y1="390" x2="214" y2="633"  stroke="url(#g-ops)"     stroke-width="3" stroke-linecap="round"/>
-                <line x1="390" y1="390" x2="105" y2="297"  stroke="url(#g-hub)"     stroke-width="3" stroke-linecap="round"/>
-            </svg>
-
-            <div class="node node-total" style="top:50%; left:50%;">
-                <div class="node-inner">
-                    <i class="bi bi-diagram-3-fill"></i>
-                    <div class="name">매실토탈</div>
-                    <div class="sub">CONTROL TOWER</div>
-                </div>
-            </div>
-            <div class="node n-insight" style="top:11.5%; left:50%;">
-                <div class="node-inner">
-                    <i class="bi bi-graph-up-arrow"></i>
-                    <div class="name">매실인사이트</div>
-                </div>
-            </div>
-            <div class="node n-brand" style="top:38.1%; left:86.5%;">
-                <div class="node-inner">
-                    <i class="bi bi-stars"></i>
-                    <div class="name">매실스튜디오</div>
-                </div>
-            </div>
-            <div class="node n-flower" style="top:81.2%; left:72.6%;">
-                <div class="node-inner">
-                    <i class="bi bi-box-seam-fill"></i>
-                    <div class="name">매실플로워</div>
-                </div>
-            </div>
-            <div class="node n-ops" style="top:81.2%; left:27.4%;">
-                <div class="node-inner">
-                    <i class="bi bi-gear-wide-connected"></i>
-                    <div class="name">매실ops</div>
-                </div>
-            </div>
-            <div class="node n-hub" style="top:38.1%; left:13.5%;">
-                <div class="node-inner">
-                    <i class="bi bi-hdd-network-fill"></i>
-                    <div class="name">매실허브</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="agent-bar">
-            <i class="bi bi-robot"></i>
-            <div>
-                <span class="a-name">매실에이전트</span>
-                <span class="a-sub"> · 매요 · 하네스 — 경영자 AI</span>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ④ 산업별 시나리오 -->
-<section class="scenarios" id="scenarios">
-    <div class="container">
-        <div style="text-align:center;">
-            <div class="eyebrow">USE CASES</div>
-            <h2 class="h2">우리 회사는 어떤 조합으로 쓰나요?</h2>
-            <p class="lead" style="margin: 0 auto;">
-                단일 산업만 하시면 필요한 것만, 3업 병행 시엔 패밀리 전체가 하나로 연결됩니다.
-            </p>
-        </div>
-
-        <div class="scenario-grid">
-            <div class="scenario s-mfg">
-                <div class="scenario-head">
-                    <div class="scenario-ico"><i class="bi bi-gear-wide-connected"></i></div>
-                    <h3>제조기업</h3>
-                </div>
-                <p>생산·품질·BOM·구매부터 원가와 회계까지. 오프라인 유통 허브로 공급망을 묶고, 경영자는 토탈에서 숫자만 봅니다.</p>
-                <div class="stack">
-                    <span class="chip"><span class="chip-dot d-ops"></span>매실ops</span>
-                    <span class="chip"><span class="chip-dot d-hub"></span>매실허브</span>
-                    <span class="chip"><span class="chip-dot d-total"></span>매실토탈</span>
-                </div>
-            </div>
-
-            <div class="scenario s-onl">
-                <div class="scenario-head">
-                    <div class="scenario-ico"><i class="bi bi-bag-heart-fill"></i></div>
-                    <h3>온라인기업</h3>
-                </div>
-                <p>시장·경쟁 데이터로 기회를 찾고, AI로 브랜드 콘텐츠를 만들고, 판매처를 허브에 꽂아 한 화면에서 관리합니다.</p>
-                <div class="stack">
-                    <span class="chip"><span class="chip-dot d-insight"></span>매실인사이트</span>
-                    <span class="chip"><span class="chip-dot d-brand"></span>매실스튜디오</span>
-                    <span class="chip"><span class="chip-dot d-hub"></span>매실허브</span>
-                    <span class="chip"><span class="chip-dot d-total"></span>매실토탈</span>
-                </div>
-            </div>
-
-            <div class="scenario s-log">
-                <div class="scenario-head">
-                    <div class="scenario-ico"><i class="bi bi-truck"></i></div>
-                    <h3>물류기업</h3>
-                </div>
-                <p>3PL·풀필먼트 입출고와 재고를 플로워가 처리하고, 허브로 화주·채널을 연결합니다. 토탈에서 운영지표를 한눈에.</p>
-                <div class="stack">
-                    <span class="chip"><span class="chip-dot d-flower"></span>매실플로워</span>
-                    <span class="chip"><span class="chip-dot d-hub"></span>매실허브</span>
-                    <span class="chip"><span class="chip-dot d-total"></span>매실토탈</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="tri-full">
-            <i class="bi bi-asterisk"></i>
-            3업을 <em>함께</em> 하신다면 → 매실 패밀리 전체가 하나의 경영 시스템으로 완결됩니다.
-        </div>
-    </div>
-</section>
-
-<!-- ⑤ 제품별 상세 -->
-<section class="products" id="products">
-    <div class="container">
-        <div style="text-align:center;">
-            <div class="eyebrow">PRODUCTS</div>
-            <h2 class="h2">제품 라인업</h2>
-            <p class="lead" style="margin: 0 auto;">
-                출시 단계별로 정직하게 표기합니다. 운영 중인 제품부터 기획 단계까지.
-            </p>
-        </div>
-
-        <div class="products-grid">
-            <!-- 매실인사이트 -->
-            <div class="product p-insight">
-                <div class="product-head">
-                    <div class="product-ico"><i class="bi bi-graph-up-arrow"></i></div>
-                    <span class="badge b-ga">🟢 운영중 · GA</span>
-                </div>
-                <h3>매실인사이트</h3>
-                <div class="one-liner">MARKET · COMPETITOR INTELLIGENCE</div>
-                <p>시장·경쟁사·트렌드 데이터를 한 곳에 모으고, 의사결정에 쓸 수 있는 형태로 정리해주는 서비스. 지금 바로 쓸 수 있습니다.</p>
-                <a href="https://maesil-insight.com" class="cta">무료 체험 <i class="bi bi-arrow-right"></i></a>
-            </div>
-
-            <!-- 매실플로워 -->
-            <div class="product p-flower">
-                <div class="product-head">
-                    <div class="product-ico"><i class="bi bi-box-seam-fill"></i></div>
-                    <span class="badge b-beta">🟡 베타 · 60%</span>
-                </div>
-                <h3>매실플로워</h3>
-                <div class="one-liner">3PL · FULFILLMENT · WMS</div>
-                <p>3PL·풀필먼트 입출고와 재고를 처리하는 물류 SaaS. 현재 60% 구현 완료, 얼리 파트너 3PL 운영 중.</p>
-                <a href="#contact" class="cta">얼리액세스 신청 <i class="bi bi-arrow-right"></i></a>
-            </div>
-
-            <!-- 매실스튜디오 -->
-            <div class="product p-brand">
-                <div class="product-head">
-                    <div class="product-ico"><i class="bi bi-stars"></i></div>
-                    <span class="badge b-live">🟢 서비스 중</span>
-                </div>
-                <h3>매실스튜디오</h3>
-                <div class="one-liner">AI BRAND CONTENT STUDIO</div>
-                <p>인스타·쇼츠/릴스 영상·상세페이지·로고·광고 카피를 AI로 자동 생성. 브랜드 정보 한 번 등록으로 전 채널 소재 완성.</p>
-                <a href="https://maesil-studio.onrender.com" target="_blank" class="cta">바로 사용하기 <i class="bi bi-arrow-right"></i></a>
-            </div>
-
-            <!-- 매실허브 -->
-            <div class="product p-hub">
-                <div class="product-head">
-                    <div class="product-ico"><i class="bi bi-hdd-network-fill"></i></div>
-                    <span class="badge b-plan">⚪ 기획중</span>
-                </div>
-                <h3>매실허브</h3>
-                <div class="one-liner">INTEGRATION · DATA BACKBONE</div>
-                <p>쇼핑몰·마켓플레이스·ERP·WMS를 꽂는 통합 커넥터 허브. 패밀리 전체가 하나의 데이터로 흐르게 하는 뼈대.</p>
-                <a href="#contact" class="cta disabled">준비 중</a>
-            </div>
-
-            <!-- 매실ops -->
-            <div class="product p-ops">
-                <div class="product-head">
-                    <div class="product-ico"><i class="bi bi-gear-wide-connected"></i></div>
-                    <span class="badge b-dev">🟠 분리 작업 중</span>
-                </div>
-                <h3>매실ops</h3>
-                <div class="one-liner">PRODUCTION · INVENTORY · ACCOUNTING</div>
-                <p>생산·출고·재고·회계까지 제조 전용 운영 시스템. 현재 모노리식 통합 시스템에 내장돼 있고, 전문 제품으로 분리 중입니다.</p>
-                <a href="#current" class="cta">통합시스템 사용 <i class="bi bi-arrow-right"></i></a>
-            </div>
-
-            <!-- 매실토탈 -->
-            <div class="product p-total">
-                <div class="product-head">
-                    <div class="product-ico"><i class="bi bi-diagram-3-fill"></i></div>
-                    <span class="badge b-plan">⚪ 기획중</span>
-                </div>
-                <h3>매실토탈</h3>
-                <div class="one-liner">EXECUTIVE CONTROL TOWER</div>
-                <p>다섯 제품의 지표를 하나로 엮는 경영자 컨트롤타워. 아침에 한 화면만 보고 의사결정할 수 있게 설계 중입니다.</p>
-                <a href="#contact" class="cta disabled">얼리 액세스 대기</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ⑥ 매실에이전트 -->
-<section id="agent" style="padding: 3rem 0;">
-    <div class="agent-section">
-        <div class="container" style="text-align:center;">
-            <div class="eyebrow">AI AGENT</div>
-            <h2 class="h2">보고는 에이전트가, <br class="only-mobile">의사결정만 대표님이.</h2>
-            <p class="lead" style="margin: 0 auto;">
-                매실에이전트는 다섯 제품의 데이터를 실시간으로 읽고, 매일 아침 핵심만 요약해 올립니다.
-                지금은 <b>매요(Mayo)</b>가 구동 중이고, <b>하네스</b>로 툴·권한이 연결돼 있습니다.
-            </p>
-            <div class="agent-feats">
-                <div class="agent-feat">
-                    <i class="bi bi-newspaper"></i>
-                    <b>데일리 브리핑</b>
-                    <p>어제의 매출·재고·CS·물류 상태를 한 장으로 정리. 숫자가 아니라 “무엇이 달라졌는지”를 알려줍니다.</p>
-                </div>
-                <div class="agent-feat">
-                    <i class="bi bi-lightbulb"></i>
-                    <b>의사결정 제안</b>
-                    <p>이상치·기회·리스크를 탐지해 선택지를 제시. 대표님은 고르기만 하면 됩니다.</p>
-                </div>
-                <div class="agent-feat">
-                    <i class="bi bi-terminal"></i>
-                    <b>하네스 · 툴 연결</b>
-                    <p>매실 패밀리 제품과 외부 도구를 하나의 에이전트 런타임으로 연결. 권한·감사까지 관리됩니다.</p>
-                </div>
-            </div>
-            <div class="agent-cta">
-                <a href="#contact" class="btn btn-primary">
-                    <i class="bi bi-robot"></i> 매요 체험 신청
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ⑦ 요금 -->
-<section class="pricing" id="pricing">
-    <div class="container">
-        <div class="eyebrow">PRICING</div>
-        <h2 class="h2">요금 — 개별 SaaS + 산업별 번들</h2>
-        <div class="pricing-note">
-            <b>요금제는 준비 중입니다.</b><br>
-            운영 중인 <b>매실인사이트</b>는 무료 체험으로, <b>매실플로워</b>는 얼리액세스 파트너십으로 먼저 시작하세요.
-            번들 요금은 매실토탈 공개 시 함께 안내드립니다.
-        </div>
-    </div>
-</section>
-
-<!-- ⑧ 현재 통합 시스템 안내 -->
-<section class="current-system" id="current">
-    <div class="container cs-wrap">
-        <i class="bi bi-box-arrow-in-right"></i>
-        <div class="eyebrow">NOW AVAILABLE</div>
-        <h2 class="h2">쪼개기 전까지는, <br class="only-mobile">통합 시스템으로 전 기능 제공</h2>
-        <p>
-            매실 패밀리 각 제품이 개별 SaaS로 분리될 때까지, 현재는 <b>운영 중인 통합 시스템</b>에서
-            생산·물류·회계·CS까지 모두 사용 가능합니다. 지금 합류하시면 분리 후 자연스럽게 전문 SaaS로 이관됩니다.
-        </p>
-        <a href="#contact" class="btn btn-primary">
-            <i class="bi bi-door-open-fill"></i> 통합 시스템 문의
-        </a>
-    </div>
-</section>
-
-<!-- 푸터 -->
-<footer id="contact">
-    <div class="foot-brand">주식회사 매실 패밀리 · MAESIL FAMILY</div>
-    <div>
-        <a href="mailto:contact@maesil.net">contact@maesil.net</a>
-        <a href="/notice/">공고</a>
-        <a href="https://gbl.maesil.net/gbl">GBL Note — 포켓몬GO 실측 메타</a>
-        <a href="https://blog.maesil.net/">블로그</a>
-        <a href="/legacy/">이전 버전</a>
-    </div>
-    <div style="margin-top: 1rem; font-size: 0.78rem; color: #888; line-height: 1.8;">
-        <div>상호: 주식회사 매실패밀리 | 대표자: 김은지</div>
-        <div>사업자등록번호: 818-87-04000 | 법인등록번호: 195511-0031842</div>
-        <div>통신판매업신고: 제2026-경남김해-0484호</div>
-        <div>주소: 경상남도 김해시 주촌면 서부로1403번길 8-63, 2층</div>
-        <div>고객센터: 055-255-2322 | 이메일: contact@maesil.net</div>
-    </div>
-    <div style="margin-top: 0.8rem;">© 2026 Maesil Family. All rights reserved.</div>
+    <div>상호: 주식회사 매실패밀리 | 대표자: 김은지</div>
+    <div>사업자등록번호: 818-87-04000 | 법인등록번호: 195511-0031842</div>
+    <div>통신판매업신고: 제2026-경남김해-0484호</div>
+    <div>주소: 경상남도 김해시 주촌면 서부로1403번길 8-63, 2층</div>
+    <div>고객센터: 055-255-2322 | 이메일: contact@maesil.net</div>
+    <div style="margin-top:10px">© 2026 Maesil Family. All rights reserved.</div>
+  </div>
 </footer>
-
 </body>
 </html>
